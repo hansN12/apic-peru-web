@@ -5,6 +5,7 @@ import { useParams, useRouter } from 'next/navigation'
 import { WEBSITE_CONFIG, THEME_CONFIG } from '@/app/config'
 import { Phone, MessageCircle, ChevronLeft, Shield, Truck, Mail, Home } from 'lucide-react'
 import { useCart } from '@/app/hooks/useCart'
+import { separarPrecio, calcularDescuentoPorcentaje } from '@/app/lib/catalogCardHelpers'
 
 export default function ProductDetailPage() {
   const params = useParams()
@@ -114,8 +115,13 @@ export default function ProductDetailPage() {
                 onMouseMove={handleMouseMove}
                 onMouseLeave={() => setIsZoomed(false)}
                 onMouseEnter={() => setIsZoomed(true)}
-                className="aspect-square bg-gray-50 border-2 border-gray-200 rounded-2xl overflow-hidden relative cursor-zoom-in group"
+                className="aspect-square bg-white border-2 border-gray-200 rounded-2xl overflow-hidden relative cursor-zoom-in group"
               >
+                {product.en_oferta && (
+                  <span className="absolute top-3 left-3 z-10 px-2.5 py-1 rounded text-xs font-semibold text-white bg-slate-900/85 border border-white/10 tracking-wide">
+                    {calcularDescuentoPorcentaje(product) ? `-${calcularDescuentoPorcentaje(product)}%` : 'OFERTA'}
+                  </span>
+                )}
                 <img
                   src={activeImage}
                   alt={product.nombre}
@@ -164,7 +170,7 @@ export default function ProductDetailPage() {
                   </div>
                   <div className="flex items-center gap-3 p-3 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-lg border border-blue-200">
                     <Truck className="w-5 h-5 text-blue-600 flex-shrink-0" />
-                    <span className="text-sm font-semibold text-blue-800">🚚 Envíos e Instalación a Nivel Nacional</span>
+                    <span className="text-sm font-semibold text-blue-800">🚚 Envíos a Nivel Nacional</span>
                   </div>
                 </div>
 
@@ -180,15 +186,37 @@ export default function ProductDetailPage() {
                 </p>
               </div>
 
+              {/* PRECIO */}
+              {(() => {
+                const { precio } = separarPrecio(product.especificaciones)
+                if (!precio) return null
+                const [clavePrecio, ...restoPrecio] = precio.split(':')
+                const valorPrecio = restoPrecio.join(':').trim()
+                return (
+                  <div className="p-5 rounded-xl bg-gray-50 border border-gray-200 text-center">
+                    <p className="text-xs text-gray-500 uppercase tracking-wide mb-1">{clavePrecio.trim()}</p>
+                    <div className="flex items-center justify-center gap-3">
+                      {product.precio_antes && (
+                        <span className="text-lg text-gray-400 line-through">
+                          {product.precio_antes.split(':')[1]?.trim()}
+                        </span>
+                      )}
+                      <p className="text-3xl sm:text-4xl font-black" style={{ color: THEME_CONFIG.color_primario }}>
+                        {valorPrecio}
+                      </p>
+                    </div>
+                  </div>
+                )
+              })()}
+
               {/* FULL-WIDTH CTA BUTTONS WITH ELASTIC BOUNCE FEEDBACK */}
               <div className="space-y-3 pt-6">
                 <button
                   onClick={handleAddToQuotation}
-                  className={`w-full py-4 rounded-xl font-bold transition-all duration-300 transform hover:-translate-y-0.5 hover:shadow-xl active:scale-[0.97] cursor-pointer ease-out ${
-                    isSelected
+                  className={`w-full py-4 rounded-xl font-bold transition-all duration-300 transform hover:-translate-y-0.5 hover:shadow-xl active:scale-[0.97] cursor-pointer ease-out ${isSelected
                       ? 'bg-red-50/20 backdrop-blur-sm text-red-600 border-2 border-red-500 font-extrabold shadow-sm hover:bg-red-100/40'
                       : 'bg-[#039dbf] text-white border border-white/10 shadow-[0_4px_20px_rgba(3,157,191,0.25)] hover:bg-[#02829e] hover:shadow-xl'
-                  }`}
+                    }`}
                 >
                   {isSelected ? '[-] Quitar de mi Lista de Cotización' : '[+] Añadir a mi Lista de Cotización'}
                 </button>
@@ -284,24 +312,26 @@ export default function ProductDetailPage() {
               {/* GARANTÍAS */}
               {activeTab === 'garantias' && (
                 <div className="space-y-0 border border-gray-200 rounded-lg overflow-hidden">
-                  {product.garantias?.map((gal: any, idx: number) => (
-                    <div
-                      key={idx}
-                      className="flex items-center justify-between p-4 border-b border-gray-100 last:border-b-0"
-                      style={{ backgroundColor: idx % 2 === 0 ? '#f9fafb' : '#ffffff' }}
-                    >
-                      <p className="text-gray-800 text-sm font-medium flex-1">{gal.pregunta}</p>
-                      <p
-                        className="font-bold text-sm px-4 py-1 rounded whitespace-nowrap"
-                        style={{
-                          color: gal.respuesta === 'SÍ' ? '#059669' : '#dc2626',
-                          backgroundColor: gal.respuesta === 'SÍ' ? '#ecfdf5' : '#fef2f2',
-                        }}
+                  {product.garantias
+                    ?.filter((gal: any) => !gal.pregunta.toLowerCase().includes('instalaci'))
+                    .map((gal: any, idx: number) => (
+                      <div
+                        key={idx}
+                        className="flex items-center justify-between p-4 border-b border-gray-100 last:border-b-0"
+                        style={{ backgroundColor: idx % 2 === 0 ? '#f9fafb' : '#ffffff' }}
                       >
-                        {gal.respuesta}
-                      </p>
-                    </div>
-                  ))}
+                        <p className="text-gray-800 text-sm font-medium flex-1">{gal.pregunta}</p>
+                        <p
+                          className="font-bold text-sm px-4 py-1 rounded whitespace-nowrap"
+                          style={{
+                            color: gal.respuesta === 'SÍ' ? '#059669' : '#dc2626',
+                            backgroundColor: gal.respuesta === 'SÍ' ? '#ecfdf5' : '#fef2f2',
+                          }}
+                        >
+                          {gal.respuesta}
+                        </p>
+                      </div>
+                    ))}
                 </div>
               )}
             </div>
@@ -315,7 +345,11 @@ export default function ProductDetailPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 lg:gap-6 mb-12 sm:mb-16">
             <div className="max-sm:text-center max-sm:flex max-sm:flex-col max-sm:items-center">
               <h4 className="text-xl font-bold mb-6 flex items-center space-x-2 max-sm:justify-center">
-                <div className="w-8 h-8 rounded-full" style={{ backgroundColor: THEME_CONFIG.color_primario }}></div>
+                <img
+                  src="/apic_icon.png"
+                  alt="APIC"
+                  className="w-8 h-8 rounded-full object-cover"
+                />
                 <span>APIC</span>
               </h4>
               <p className="text-gray-400 leading-relaxed text-sm">
