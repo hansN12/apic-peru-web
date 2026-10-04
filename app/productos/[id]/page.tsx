@@ -70,12 +70,20 @@ export default function ProductDetailPage() {
 
   return (
     <>
+      {/* 🎨 VARIABLES CSS DEL TEMA ACTIVO — ver explicación en app/page.tsx */}
+      <style>{`
+        :root {
+          --color-primario: ${THEME_CONFIG.color_primario};
+          --color-hover: ${THEME_CONFIG.color_hover};
+          --sombra-primario: ${THEME_CONFIG.gradiente_sheen};
+        }
+      `}</style>
       {/* STICKY HEADER */}
       <header className="sticky top-0 z-40 bg-white/80 backdrop-blur-md shadow-sm border-b border-gray-100/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <button
             onClick={() => router.back()}
-            className="flex items-center gap-2 text-[#0b0f19] hover:text-[#039dbf] transition group hover:-translate-x-0.5 transition-all duration-300"
+            className="flex items-center gap-2 text-[#0b0f19] hover:text-[var(--color-primario)] transition group hover:-translate-x-0.5 transition-all duration-300"
           >
             <ChevronLeft className="w-5 h-5 group-hover:scale-110 transition-transform" />
             <span className="text-sm font-medium">Volver</span>
@@ -118,7 +126,7 @@ export default function ProductDetailPage() {
                 className="aspect-square bg-white border-2 border-gray-200 rounded-2xl overflow-hidden relative cursor-zoom-in group"
               >
                 {product.en_oferta && (
-                  <span className="absolute top-3 left-3 z-10 px-2.5 py-1 rounded text-xs font-semibold text-white bg-slate-900/85 border border-white/10 tracking-wide">
+                  <span className="absolute top-3 left-3 z-10 px-2.5 py-1 rounded text-xs font-semibold text-white border border-white/10 tracking-wide" style={{ backgroundColor: `${THEME_CONFIG.color_badge_oferta}D9` }}>
                     {calcularDescuentoPorcentaje(product) ? `-${calcularDescuentoPorcentaje(product)}%` : 'OFERTA'}
                   </span>
                 )}
@@ -215,7 +223,7 @@ export default function ProductDetailPage() {
                   onClick={handleAddToQuotation}
                   className={`w-full py-4 rounded-xl font-bold transition-all duration-300 transform hover:-translate-y-0.5 hover:shadow-xl active:scale-[0.97] cursor-pointer ease-out ${isSelected
                       ? 'bg-red-50/20 backdrop-blur-sm text-red-600 border-2 border-red-500 font-extrabold shadow-sm hover:bg-red-100/40'
-                      : 'bg-[#039dbf] text-white border border-white/10 shadow-[0_4px_20px_rgba(3,157,191,0.25)] hover:bg-[#02829e] hover:shadow-xl'
+                      : 'bg-[var(--color-primario)] text-white border border-white/10 shadow-[0_4px_20px_var(--sombra-primario)] hover:bg-[var(--color-hover)] hover:shadow-xl'
                     }`}
                 >
                   {isSelected ? '[-] Quitar de mi Lista de Cotización' : '[+] Añadir a mi Lista de Cotización'}
@@ -389,7 +397,7 @@ export default function ProductDetailPage() {
                   href={redes_sociales?.tiktok || '#'}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-lg bg-[#1f2937] hover:bg-[#039dbf] transition flex items-center justify-center text-white cursor-pointer"
+                  className="w-10 h-10 rounded-lg bg-[#1f2937] hover:bg-[var(--color-primario)] transition flex items-center justify-center text-white cursor-pointer"
                   aria-label="TikTok"
                 >
                   <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24" xmlns="http://w3.org">
@@ -402,7 +410,7 @@ export default function ProductDetailPage() {
                   href={redes_sociales?.instagram || '#'}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-lg bg-[#1f2937] hover:bg-[#039dbf] transition flex items-center justify-center text-white cursor-pointer"
+                  className="w-10 h-10 rounded-lg bg-[#1f2937] hover:bg-[var(--color-primario)] transition flex items-center justify-center text-white cursor-pointer"
                   aria-label="Instagram"
                 >
                   <svg className="w-5 h-5 fill-none stroke-current" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" xmlns="http://w3.org">
@@ -417,7 +425,7 @@ export default function ProductDetailPage() {
                   href={redes_sociales?.facebook || '#'}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-lg bg-[#1f2937] hover:bg-[#039dbf] transition flex items-center justify-center text-white cursor-pointer"
+                  className="w-10 h-10 rounded-lg bg-[#1f2937] hover:bg-[var(--color-primario)] transition flex items-center justify-center text-white cursor-pointer"
                   aria-label="Facebook"
                 >
                   <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24" xmlns="http://w3.org">

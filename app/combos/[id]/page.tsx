@@ -39,13 +39,20 @@ export default function CombosPage() {
 
   return (
     <>
+      {/* 🎨 VARIABLES CSS DEL TEMA ACTIVO — ver explicación en app/page.tsx */}
+      <style>{`
+        :root {
+          --color-primario: ${THEME_CONFIG.color_primario};
+          --color-hover: ${THEME_CONFIG.color_hover};
+        }
+      `}</style>
       {/* ===== HEADER MINIMALISTA DEL DASHBOARD ===== */}
       <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-gray-200/50">
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
           <div className="flex items-center gap-4 sm:gap-6">
             <button
               onClick={() => router.push('/')}
-              className="flex items-center gap-1.5 text-sm font-medium text-gray-600 hover:text-[#039dbf] transition cursor-pointer"
+              className="flex items-center gap-1.5 text-sm font-medium text-gray-600 hover:text-[var(--color-primario)] transition cursor-pointer"
               aria-label="Volver al inicio"
             >
               <ChevronLeft className="w-4 h-4" />
@@ -63,7 +70,7 @@ export default function CombosPage() {
 
           <button
             onClick={handleMiListaClick}
-            className="bg-[#039dbf] text-white px-4 sm:px-6 py-2 rounded-lg hover:bg-[#02829e] transition font-medium cursor-pointer relative text-sm"
+            className="bg-[var(--color-primario)] text-white px-4 sm:px-6 py-2 rounded-lg hover:bg-[var(--color-hover)] transition font-medium cursor-pointer relative text-sm"
           >
             Mi Lista ({selectedItems.length})
             {selectedItems.length > 0 && (
@@ -86,7 +93,7 @@ export default function CombosPage() {
                   key={seccion.id_seccion}
                   onClick={() => router.push(`/combos/${seccion.id_seccion}`)}
                   className={`flex-shrink-0 px-4 py-2 rounded-full text-sm font-semibold whitespace-nowrap transition-all duration-300 cursor-pointer ${activa
-                    ? 'bg-[#039dbf] text-white'
+                    ? 'bg-[var(--color-primario)] text-white'
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                     }`}
                 >
@@ -111,7 +118,7 @@ export default function CombosPage() {
                         key={seccion.id_seccion}
                         onClick={() => router.push(`/combos/${seccion.id_seccion}`)}
                         className={`w-full text-left px-3 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300 cursor-pointer ${activa
-                          ? 'bg-[#039dbf]/10 text-[#039dbf] border-l-4 border-[#039dbf]'
+                          ? 'bg-[var(--color-primario)]/10 text-[var(--color-primario)] border-l-4 border-[var(--color-primario)]'
                           : 'text-gray-600 hover:bg-gray-50 border-l-4 border-transparent'
                           }`}
                       >
@@ -141,13 +148,13 @@ export default function CombosPage() {
                     <div
                       key={product.id}
                       onClick={() => router.push('/productos/' + product.id)}
-                      className="group bg-gray-50 rounded-xl shadow-sm border border-gray-200 flex flex-col h-full transition-all duration-300 hover:scale-[1.02] hover:shadow-md hover:border-[#039dbf]/50 cursor-pointer"
+                      className="group bg-gray-50 rounded-xl shadow-sm border border-gray-200 flex flex-col h-full transition-all duration-300 hover:scale-[1.02] hover:shadow-md hover:border-[var(--color-primario)]/50 cursor-pointer"
                     >
                       <div className="relative h-36 sm:h-44 w-full overflow-hidden rounded-t-xl bg-white">
                         {badge && (
                           <span
                             className="absolute top-2 right-2 z-10 px-3 py-1 rounded-full text-xs font-bold text-white shadow-md"
-                            style={{ backgroundColor: '#039dbf' }}
+                            style={{ backgroundColor: THEME_CONFIG.color_primario }}
                           >
                             {badge}
                           </span>
@@ -167,7 +174,7 @@ export default function CombosPage() {
                           <ul className="space-y-1.5">
                             {specsPreview.map((spec, idx) => (
                               <li key={idx} className="text-sm text-gray-600 flex items-start">
-                                <span className="text-[#039dbf] mr-2 flex-shrink-0">✓</span>
+                                <span className="text-[var(--color-primario)] mr-2 flex-shrink-0">✓</span>
                                 <span className="line-clamp-1 min-w-0 flex-1">{spec}</span>
                               </li>
                             ))}
@@ -176,7 +183,7 @@ export default function CombosPage() {
                             <ul className="space-y-1.5">
                               {specsPreview.map((spec, idx) => (
                                 <li key={idx} className="text-xs text-gray-700 flex items-start">
-                                  <span className="text-[#039dbf] mr-2 flex-shrink-0">✓</span>
+                                  <span className="text-[var(--color-primario)] mr-2 flex-shrink-0">✓</span>
                                   <span>{spec}</span>
                                 </li>
                               ))}
@@ -202,7 +209,7 @@ export default function CombosPage() {
                               e.stopPropagation()
                               router.push('/productos/' + product.id)
                             }}
-                            className="w-full text-[#039dbf] hover:text-[#0b0f19] transition text-sm font-medium py-1 border-b border-gray-300 hover:border-[#039dbf]"
+                            className="w-full text-[var(--color-primario)] hover:text-[#0b0f19] transition text-sm font-medium py-1 border-b border-gray-300 hover:border-[var(--color-primario)]"
                             aria-label={`Ver ficha técnica de ${product.nombre}`}
                           >
                             Ficha Técnica →
@@ -214,7 +221,7 @@ export default function CombosPage() {
                             }}
                             className={`w-full py-2 rounded font-semibold transition-all duration-300 ${selectedItems.includes(product.nombre)
                               ? 'bg-red-600 hover:bg-red-700 text-white'
-                              : 'bg-[#039dbf] hover:bg-[#02829e] text-white'
+                              : 'bg-[var(--color-primario)] hover:bg-[var(--color-hover)] text-white'
                               }`}
                             aria-label={selectedItems.includes(product.nombre) ? `Quitar ${product.nombre}` : `Añadir ${product.nombre}`}
                           >
@@ -260,7 +267,7 @@ export default function CombosPage() {
                       {selectedItems.map((item, idx) => (
                         <li key={idx} className="text-gray-700 flex items-center justify-between">
                           <span className="flex items-center">
-                            <span className="text-[#039dbf] mr-3 font-bold text-xl">✓</span>
+                            <span className="text-[var(--color-primario)] mr-3 font-bold text-xl">✓</span>
                             {item}
                           </span>
                           <button
@@ -276,7 +283,7 @@ export default function CombosPage() {
 
                   <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
                     <p className="text-gray-700 text-sm">
-                      <span className="text-[#039dbf] font-semibold">Total de equipos:</span> {selectedItems.length}
+                      <span className="text-[var(--color-primario)] font-semibold">Total de equipos:</span> {selectedItems.length}
                     </p>
                   </div>
 
@@ -284,7 +291,7 @@ export default function CombosPage() {
                     href={whatsappLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full bg-[#039dbf] text-white py-4 rounded-lg font-bold text-center hover:bg-[#02829e] transition flex items-center justify-center gap-2"
+                    className="w-full bg-[var(--color-primario)] text-white py-4 rounded-lg font-bold text-center hover:bg-[var(--color-hover)] transition flex items-center justify-center gap-2"
                   >
                     <MessageCircle className="w-5 h-5" />
                     <span>Enviar Cotización por WhatsApp</span>

@@ -4,12 +4,78 @@
 // Todos los cambios aquí se reflejan automáticamente en todas las páginas.
 // ¡NO EDITAR CÓDIGO JavaScript abajo! Solo modificar los datos aquí.
 
-// 🎨 TEMA VISUAL - IDENTIDAD CORPORATIVA
-export const THEME_CONFIG = {
-  color_primario: '#039dbf',
-  color_hover: '#02829e',
-  color_fondo_tarjetas: '#0080ff',
-}
+// ============================================================
+// 🎨 MOTOR DE TEMAS ESTACIONALES (THEME_SCHEMES)
+// ============================================================
+// ¿Qué es esto? Es el "clóset de colores" de toda la tienda. En vez de
+// cambiar un color aquí y otro allá —lo cual rompe la armonía visual y
+// el contraste entre textos y fondos—, este bloque guarda 3 paletas
+// COMPLETAS, ya balanceadas entre sí. Para cambiar la identidad visual de
+// TODO el sitio (botones, insignias de oferta, el brillo ambiental de las
+// tarjetas "Nosotros", los bordes del pie de página) solo se cambia UNA
+// palabra: la variable 'TEMA_ACTIVO', justo debajo de este bloque.
+//
+// 👉 PARA CAMBIAR DE TEMPORADA: baja hasta la línea que dice
+//    "export const TEMA_ACTIVO" y reemplaza el texto entre comillas por
+//    una de estas 3 opciones (deben escribirse EXACTAMENTE así, con
+//    mayúsculas y guion bajo):
+//
+//      'PRO_DEFAULT'      → Turquesa corporativo (identidad de siempre)
+//      'WARM_SEASON'      → Cobre cálido (campañas de verano / aniversario)
+//      'HOLIDAY_PREMIUM'  → Carmín profundo (campañas navideñas / fin de año)
+//
+// No hace falta tocar nada más: botones, insignias de oferta, brillos
+// ambientales y bordes del pie de página se actualizan solos, en todas
+// las páginas, al instante.
+// ============================================================
+export const THEME_SCHEMES = {
+  PRO_DEFAULT: {
+    nombre_visible: 'Turquesa Corporativo (predeterminado)',
+    color_primario: '#039dbf',          // Botones, enlaces, precios destacados, acentos
+    color_hover: '#02829e',             // Color al pasar el mouse sobre botones/enlaces
+    color_fondo_tarjetas: '#0080ff',    // Uso interno reservado — no es necesario tocarlo
+    gradiente_sheen: 'rgba(3, 157, 191, 0.35)',           // Brillo que sigue el cursor (tarjetas "Nosotros")
+    gradiente_respirar_borde: 'rgba(3, 157, 191, 0.45)',  // Borde de la animación de "respiración" continua
+    gradiente_respirar_sombra: 'rgba(3, 157, 191, 0.18)', // Resplandor/sombra de esa misma animación
+    color_badge_oferta: '#0f172a',      // Fondo de la insignia "OFERTA / -15%" en productos en liquidación
+  },
+  WARM_SEASON: {
+    nombre_visible: 'Cobre Cálido (Temporada Verano / Aniversario)',
+    color_primario: '#c2703d',          // Cobre cálido — mismo rol que color_primario arriba
+    color_hover: '#a85c2e',
+    color_fondo_tarjetas: '#c2703d',
+    gradiente_sheen: 'rgba(194, 112, 61, 0.35)',
+    gradiente_respirar_borde: 'rgba(194, 112, 61, 0.45)',
+    gradiente_respirar_sombra: 'rgba(194, 112, 61, 0.18)',
+    color_badge_oferta: '#3a2416',
+  },
+  HOLIDAY_PREMIUM: {
+    nombre_visible: 'Carmín Profundo (Temporada Navideña)',
+    color_primario: '#9b1b30',          // Carmín profundo, estilo premium — mismo rol que arriba
+    color_hover: '#7a1526',
+    color_fondo_tarjetas: '#9b1b30',
+    gradiente_sheen: 'rgba(155, 27, 48, 0.35)',
+    gradiente_respirar_borde: 'rgba(155, 27, 48, 0.45)',
+    gradiente_respirar_sombra: 'rgba(155, 27, 48, 0.18)',
+    color_badge_oferta: '#2a0a10',
+  },
+} as const
+
+// ============================================================
+// 🔑 INTERRUPTOR MAESTRO DE TEMPORADA — LA ÚNICA LÍNEA QUE IMPORTA
+// ============================================================
+// Escribe aquí, entre comillas simples, el nombre EXACTO de uno de los
+// 3 esquemas definidos arriba. Esta es la única línea que un
+// administrador de la tienda necesita tocar para cambiar el color de
+// todo el sitio.
+export const TEMA_ACTIVO: keyof typeof THEME_SCHEMES = 'PRO_DEFAULT'
+
+// 🎨 THEME_CONFIG: el tema actualmente activo, ya resuelto a partir de
+// TEMA_ACTIVO. El resto del código —en todas las páginas— usa siempre
+// 'THEME_CONFIG', nunca 'THEME_SCHEMES' directamente. Por eso cambiar
+// TEMA_ACTIVO arriba cambia este objeto automáticamente, sin tocar
+// ningún otro archivo del proyecto.
+export const THEME_CONFIG = THEME_SCHEMES[TEMA_ACTIVO]
 
 export const WEBSITE_CONFIG = {
   numero_whatsapp: '51994942994',
@@ -30,24 +96,56 @@ export const WEBSITE_CONFIG = {
     },
   ],
 
-  // 🗂️ SECCIONES DE CATÁLOGO — ARQUITECTURA POR FAMILIA MADRE
-  // Cada bloque de 'secciones_catalogo' representa UNA familia de producto
-  // (p. ej. 'Plataforma 360', 'Domos'). Dentro de cada familia, cada nivel
-  // Combo N es su PROPIO objeto de producto independiente (id, sku, imagen,
-  // descripción, ficha técnica y garantías propias). El Mega Menu y el Home
-  // recorren este arreglo dinámicamente: agregar una nueva familia aquí
-  // basta para que aparezca automáticamente en ambos.
+  // ============================================================
+  // 🗂️ CATÁLOGO DE PRODUCTOS — GUÍA RÁPIDA PARA EDITAR SIN PROGRAMAR
+  // ============================================================
+  // Cómo está organizado:
+  //   'secciones_catalogo' es una lista de FAMILIAS (p. ej. "Plataforma
+  //   360", "Domos"). Cada familia tiene un nombre y una lista interna
+  //   de 'productos': uno por cada Combo/nivel (Combo 1, Combo 2, ...).
+  //   Cada Combo es una tarjeta independiente en la tienda, con su
+  //   propio precio, fotos y ficha técnica.
+  //
+  // Tareas comunes:
+  //   • Cambiar un precio → busca la línea que empieza con "Costo:" o
+  //     "Precio:" dentro de 'especificaciones' DEL COMBO QUE QUIERES
+  //     EDITAR, y también dentro de 'ficha_tecnica' (aparece dos veces,
+  //     cámbialo en ambos lugares para que coincidan en toda la web).
+  //   • Poner un producto en oferta → cambia 'en_oferta' a 'true' y
+  //     escribe el precio anterior en 'precio_antes' (ej: 'Precio Antes:
+  //     2600 soles'). Para quitarlo de oferta, 'en_oferta' a 'false' y
+  //     'precio_antes' a 'null'.
+  //   • Cambiar fotos → reemplaza las rutas dentro de 'imagenes_galeria'
+  //     por las tuyas (deben existir en la carpeta /public del proyecto).
+  //   • Agregar un Combo nuevo a una familia existente → copia un
+  //     producto completo (desde la '{' hasta la '}' que lo cierra),
+  //     pégalo dentro del mismo 'productos: [ ... ]', y dale un 'id'
+  //     número que no se repita con ningún otro producto del catálogo.
+  //   • Agregar una familia nueva → copia un bloque completo de familia
+  //     (desde 'id_seccion' hasta el ']' que cierra sus 'productos'),
+  //     pégalo al final de la lista 'secciones_catalogo', cámbiale el
+  //     nombre y los productos. Aparece solo en el Mega Menu y el Home.
+  //
+  // ⚠️ Cuidado al editar: respeta las comillas ('...') y las comas al
+  // final de cada línea — si borras una coma o una comilla, el sitio
+  // puede dejar de funcionar. Ante la duda, copia un producto que ya
+  // funcione como plantilla en vez de escribir uno desde cero.
+  //
+  // 👇 El primer producto de abajo (Plataforma 360 — Combo 1) está
+  // comentado campo por campo, a modo de ejemplo. El resto del catálogo
+  // sigue exactamente el mismo patrón, solo que sin repetir cada
+  // comentario (para no triplicar el tamaño de este archivo).
   secciones_catalogo: [
     {
-      id_seccion: 'plataforma-360',
-      titulo_seccion: 'Plataforma 360',
+      id_seccion: 'plataforma-360', // Identificador interno (minúsculas, sin espacios) — se usa en la URL /combos/plataforma-360
+      titulo_seccion: 'Plataforma 360', // Nombre visible en el Mega Menu, el sidebar de combos y el encabezado de la familia
       productos: [
         {
-          id: 1,
-          nombre: 'Plataforma 360 — Combo 1',
+          id: 1, // Único en TODO el catálogo (ningún otro producto debe repetir este número)
+          nombre: 'Plataforma 360 — Combo 1', // Nombre visible de la tarjeta. El texto tras el "—" se muestra como insignia (badge) en la esquina de la foto
           sku: 'P360-EVT-001-C1',
-          categoria: 'Plataforma 360',
-          especificaciones: [
+          categoria: 'Plataforma 360', // Debe coincidir con 'titulo_seccion' de su familia — se usa en migas de pan (breadcrumbs)
+          especificaciones: [ // Viñetas cortas 'Clave: Valor' que se ven en las tarjetas del catálogo y en la vista previa
             'Peso: 25 kg',
             'Medida: 1 metro de diámetro',
             'Capacidad: 4-5 personas',
@@ -55,13 +153,13 @@ export const WEBSITE_CONFIG = {
             'Garantía: 1 año',
             'Material: Metal',
             'Características: Caja de control de velocidad, control inalámbrico de 50 mts de alcance, transformador de 20v, soporte para celular',
-            'Costo: 2200 soles',
+            'Costo: 2200 soles', // 👈 PRECIO ACTUAL — edítalo aquí Y en 'ficha_tecnica' más abajo
           ],
-          descripcion: 'Plataforma 360 — Combo 1. Peso: 25 kg. Costo: 2200 soles.',
-          descripcion_larga: 'Convierte cualquier celebración en contenido viral: tus invitados suben a la plataforma, extienden los brazos, y la cámara gira 360° capturando cada expresión en un single video que todos querrán compartir.',
-          imagenes_galeria: ['/equipos/PLATAFORMA-360º/COMBO 1/PLATAFORMA 360_IMG 1 PLAT 01.jpg', '/equipos/PLATAFORMA-360º/COMBO 1/PLATAFORMA 360_IMG 2 PLAT 01.jpg', '/equipos/PLATAFORMA-360º/COMBO 1/PLATAFORMA 360_IMG 3 PLAT 01.jpg'],
+          descripcion: 'Plataforma 360 — Combo 1. Peso: 25 kg. Costo: 2200 soles.', // Resumen corto, no se ve mucho en pantalla — puedes dejarlo simple
+          descripcion_larga: 'Convierte cualquier celebración en contenido viral: tus invitados suben a la plataforma, extienden los brazos, y la cámara gira 360° capturando cada expresión en un solo video que todos querrán compartir.', // Texto comercial/emocional que se ve en la página de detalle del producto
+          imagenes_galeria: ['/equipos/PLATAFORMA-360º/COMBO 1/PLATAFORMA 360_IMG 1 PLAT 01.jpg', '/equipos/PLATAFORMA-360º/COMBO 1/PLATAFORMA 360_IMG 2 PLAT 01.jpg', '/equipos/PLATAFORMA-360º/COMBO 1/PLATAFORMA 360_IMG 3 PLAT 01.jpg'], // Rutas a fotos dentro de la carpeta /public del proyecto
           sobre_la_marca: 'APIC es fabricante líder en soluciones audiovisuales con más de 10 años de experiencia en eventos de alto impacto.',
-          ficha_tecnica: [
+          ficha_tecnica: [ // La misma información que 'especificaciones', pero en formato tabla (pestaña "Ficha Técnica" del producto)
             { label: 'Peso', valor: '25 kg' },
             { label: 'Medida', valor: '1 metro de diámetro' },
             { label: 'Capacidad', valor: '4-5 personas' },
@@ -69,15 +167,18 @@ export const WEBSITE_CONFIG = {
             { label: 'Garantía', valor: '1 año' },
             { label: 'Material', valor: 'Metal' },
             { label: 'Características', valor: 'Caja de control de velocidad, control inalámbrico de 50 mts de alcance, transformador de 20v, soporte para celular' },
-            { label: 'Costo', valor: '2200 soles' },
+            { label: 'Costo', valor: '2200 soles' }, // 👈 Debe ser IGUAL al "Costo:" de 'especificaciones' arriba
           ],
-          garantias: [
+          garantias: [ // Preguntas y respuestas ('SÍ' / 'NO') que se ven en la pestaña "Garantías" del producto
             { pregunta: 'Garantía de fábrica APIC (1 año)', respuesta: 'SÍ' },
             { pregunta: 'Cobertura por defectos de fabricación', respuesta: 'SÍ' },           
             { pregunta: 'Reemplazo por daño de uso indebido', respuesta: 'NO' },
           ],
-          en_oferta: true,
-          precio_antes: 'Precio Antes: 2600 soles',
+          en_oferta: true, // 'true' = aparece en la sección "Liquidación de Stock" del Home. 'false' = producto normal
+          precio_antes: 'Precio Antes: 2600 soles', // Solo se usa si 'en_oferta' es 'true' — se muestra tachado junto al precio actual. Si 'en_oferta' es 'false', este valor debe ser 'null' y si es 'true', debe contener el precio anterior (ej: 'Precio Antes: x soles').
+          // ⚠️ NOTA: este producto y otros 5 más quedaron marcados como ejemplo ilustrativo de la
+          // función "oferta" en una sesión de trabajo anterior — revisa qué productos quieres
+          // poner realmente en oferta y con qué precio anterior antes de publicar el sitio.
         },
         {
           id: 2,
@@ -1227,12 +1328,19 @@ export const WEBSITE_CONFIG = {
   // 📦 CATÁLOGO GENERAL - TODOS LOS PRODUCTOS COMBINADOS (flujo unificado)
   // Utilizado por app/productos/[id]/page.tsx y app/combos/[id]/page.tsx
   // para la búsqueda de productos sin depender de arreglos separados.
-  CATALOGO_GENERAL: [] as any, // Se rellena dinámicamente abajo
+  CATALOGO_GENERAL: [] as any, // Se rellena dinámicamente abajo — no escribir nada aquí a mano
 }
 
-// Combinar todas las secciones del catálogo en CATALOGO_GENERAL.
-// Al ser dinámico sobre 'secciones_catalogo', agregar una nueva sección
-// (o productos a una existente) se refleja aquí automáticamente.
+// ============================================================
+// ⚠️ ZONA TÉCNICA — NO EDITAR A PARTIR DE AQUÍ
+// ============================================================
+// Lo de abajo es lógica de programación, no datos de catálogo. Combina
+// automáticamente todas las familias de 'secciones_catalogo' en una sola
+// lista plana ('CATALOGO_GENERAL') que usan las páginas de producto y de
+// combos para buscar cualquier artículo. Es dinámico: agregar una familia
+// o un producto arriba se refleja aquí solo, sin tocar esta línea.
+// Si esta sección se borra o se modifica, el sitio deja de funcionar.
+// ============================================================
 WEBSITE_CONFIG.CATALOGO_GENERAL = WEBSITE_CONFIG.secciones_catalogo.flatMap(
   (seccion) => seccion.productos
 )

@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { ChevronLeft, ChevronRight, MessageCircle, Mail, Phone, Menu, Shield, Truck, ShoppingCart, X } from 'lucide-react'
-import { WEBSITE_CONFIG } from '@/app/config'
+import { WEBSITE_CONFIG, THEME_CONFIG } from '@/app/config'
 import { useCart } from '@/app/hooks/useCart'
 import { extraerBadgeCombo, separarPrecio, obtenerPrecioNumerico, obtenerSpecsPreview, calcularDescuentoPorcentaje } from '@/app/lib/catalogCardHelpers'
 
@@ -132,6 +132,17 @@ export default function Page() {
 
   return (
     <>
+      {/* 🎨 VARIABLES CSS DEL TEMA ACTIVO — cascada global del motor de temas.          */}
+      {/* Todas las clases Tailwind de este archivo que dicen '[var(--color-primario)]' */}
+      {/* o '[var(--color-hover)]' leen su color real de aquí. Cambiar 'TEMA_ACTIVO' en  */}
+      {/* config.ts cambia estos valores, y por lo tanto TODO lo que los usa, sin tocar  */}
+      {/* ninguna otra línea de este archivo. */}
+      <style>{`
+        :root {
+          --color-primario: ${THEME_CONFIG.color_primario};
+          --color-hover: ${THEME_CONFIG.color_hover};
+        }
+      `}</style>
       {/* ===== HEADER NAVEGACIÓN - LIGHT THEME ===== */}
       {/* 🚨 EDITAR NAVEGACIÓN Y ENLACES AQUÍ 🚨 */}
       <header
@@ -154,7 +165,7 @@ export default function Page() {
               <a
                 href="#"
                 onClick={(e) => { e.preventDefault(); smoothScrollToElement('inicio') }}
-                className="text-[#0b0f19] hover:text-[#039dbf] transition font-semibold text-sm cursor-pointer"
+                className="text-[#0b0f19] hover:text-[var(--color-primario)] transition font-semibold text-sm cursor-pointer"
               >
                 Inicio
               </a>
@@ -163,7 +174,7 @@ export default function Page() {
               <a
                 href="#"
                 onClick={(e) => { e.preventDefault(); smoothScrollToElement('nosotros') }}
-                className="text-[#0b0f19] hover:text-[#039dbf] transition font-semibold text-sm cursor-pointer"
+                className="text-[#0b0f19] hover:text-[var(--color-primario)] transition font-semibold text-sm cursor-pointer"
               >
                 Nosotros
               </a>
@@ -179,7 +190,7 @@ export default function Page() {
                   setIsMegaMenuOpen(false)
                   router.push('/combos/all')
                 }}
-                className="text-[#0b0f19] hover:text-[#039dbf] transition font-semibold text-sm cursor-pointer"
+                className="text-[#0b0f19] hover:text-[var(--color-primario)] transition font-semibold text-sm cursor-pointer"
                 aria-haspopup="true"
                 aria-expanded={isMegaMenuOpen}
               >
@@ -190,7 +201,7 @@ export default function Page() {
               <a
                 href="#"
                 onClick={(e) => { e.preventDefault(); smoothScrollToElement('contacto') }}
-                className="text-[#0b0f19] hover:text-[#039dbf] transition font-semibold text-sm cursor-pointer"
+                className="text-[#0b0f19] hover:text-[var(--color-primario)] transition font-semibold text-sm cursor-pointer"
               >
                 Contacto
               </a>
@@ -200,7 +211,7 @@ export default function Page() {
           {/* DESKTOP MI LISTA BUTTON */}
           <button
             onClick={handleMiListClick}
-            className="hidden md:block bg-[#039dbf] text-white px-6 py-2 rounded-lg hover:bg-[#02829e] transition font-medium cursor-pointer relative"
+            className="hidden md:block bg-[var(--color-primario)] text-white px-6 py-2 rounded-lg hover:bg-[var(--color-hover)] transition font-medium cursor-pointer relative"
           >
             Mi Lista ({selectedItems.length})
             {selectedItems.length > 0 && (
@@ -236,8 +247,8 @@ export default function Page() {
             <style>{`
               .mega-menu-scroll::-webkit-scrollbar { width: 6px; }
               .mega-menu-scroll::-webkit-scrollbar-track { background: transparent; }
-              .mega-menu-scroll::-webkit-scrollbar-thumb { background-color: rgba(3, 157, 191, 0.3); border-radius: 9999px; }
-              .mega-menu-scroll::-webkit-scrollbar-thumb:hover { background-color: rgba(3, 157, 191, 0.5); }
+              .mega-menu-scroll::-webkit-scrollbar-thumb { background-color: ${THEME_CONFIG.gradiente_sheen}; border-radius: 9999px; }
+              .mega-menu-scroll::-webkit-scrollbar-thumb:hover { background-color: ${THEME_CONFIG.gradiente_respirar_borde}; }
             `}</style>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 relative">
               <div className="mega-menu-scroll max-h-[60vh] overflow-y-auto pr-1">
@@ -251,10 +262,10 @@ export default function Page() {
                         setIsMegaMenuOpen(false)
                         router.push(`/combos/${section.slug}`)
                       }}
-                      className="flex items-center gap-3 p-3.5 rounded-lg border border-gray-200/80 hover:border-[#039dbf]/50 hover:bg-gray-50 transition-all duration-300 cursor-pointer group"
+                      className="flex items-center gap-3 p-3.5 rounded-lg border border-gray-200/80 hover:border-[var(--color-primario)]/50 hover:bg-gray-50 transition-all duration-300 cursor-pointer group"
                     >
-                      <span className="w-1 h-5 bg-[#039dbf] flex-shrink-0"></span>
-                      <span className="text-sm font-semibold tracking-wide text-gray-700 group-hover:text-[#039dbf] transition">
+                      <span className="w-1 h-5 bg-[var(--color-primario)] flex-shrink-0"></span>
+                      <span className="text-sm font-semibold tracking-wide text-gray-700 group-hover:text-[var(--color-primario)] transition">
                         {section.titulo}
                       </span>
                     </a>
@@ -279,7 +290,7 @@ export default function Page() {
                     smoothScrollToElement('inicio')
                     setMobileMenuOpen(false)
                   }}
-                  className="text-[#0b0f19] hover:text-[#039dbf] transition font-medium block py-2 cursor-pointer"
+                  className="text-[#0b0f19] hover:text-[var(--color-primario)] transition font-medium block py-2 cursor-pointer"
                 >
                   Inicio
                 </a>
@@ -292,7 +303,7 @@ export default function Page() {
                     smoothScrollToElement('nosotros')
                     setMobileMenuOpen(false)
                   }}
-                  className="text-[#0b0f19] hover:text-[#039dbf] transition font-medium block py-2 cursor-pointer"
+                  className="text-[#0b0f19] hover:text-[var(--color-primario)] transition font-medium block py-2 cursor-pointer"
                 >
                   Nosotros
                 </a>
@@ -305,7 +316,7 @@ export default function Page() {
                     setMobileMenuOpen(false)
                     router.push('/combos/all')
                   }}
-                  className="text-[#0b0f19] hover:text-[#039dbf] transition font-medium block py-2 cursor-pointer"
+                  className="text-[#0b0f19] hover:text-[var(--color-primario)] transition font-medium block py-2 cursor-pointer"
                 >
                   Productos
                 </a>
@@ -318,7 +329,7 @@ export default function Page() {
                     smoothScrollToElement('contacto')
                     setMobileMenuOpen(false)
                   }}
-                  className="text-[#0b0f19] hover:text-[#039dbf] transition font-medium block py-2 cursor-pointer"
+                  className="text-[#0b0f19] hover:text-[var(--color-primario)] transition font-medium block py-2 cursor-pointer"
                 >
                   Contacto
                 </a>
@@ -329,7 +340,7 @@ export default function Page() {
                     handleMiListClick()
                     setMobileMenuOpen(false)
                   }}
-                  className="w-full bg-[#039dbf] text-white px-4 py-2 rounded-lg hover:bg-[#02829e] transition font-medium cursor-pointer relative"
+                  className="w-full bg-[var(--color-primario)] text-white px-4 py-2 rounded-lg hover:bg-[var(--color-hover)] transition font-medium cursor-pointer relative"
                 >
                   Mi Lista ({selectedItems.length})
                   {selectedItems.length > 0 && (
@@ -373,15 +384,15 @@ export default function Page() {
               >
                 {/* Overlay oscuro: asegura contraste del texto blanco tanto sobre una foto como sobre el degradado */}
                 <div className="absolute inset-0 bg-black/40"></div>
-                <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 30% 20%, #039dbf, transparent 55%)' }}></div>
+                <div className="absolute inset-0 opacity-20" style={{ backgroundImage: `radial-gradient(circle at 30% 20%, ${THEME_CONFIG.color_primario}, transparent 55%)` }}></div>
                 <div className="relative z-10 text-center text-white px-4 max-w-4xl">
                   <h1 className="text-3xl sm:text-5xl lg:text-7xl font-bold mb-4 sm:mb-6 text-balance">{slide.titulo_carrusel}</h1>
                   <p className="text-base sm:text-lg lg:text-2xl mb-6 sm:mb-8 text-gray-300">{slide.subtitulo_carrusel}</p>
-                  <button
-                    onClick={() => smoothScrollToElement('liquidacion')}
-                    className="bg-[#039dbf] text-white px-8 py-3 rounded-lg font-bold text-lg hover:bg-[#02829e] transition-all duration-300 hover:scale-105 cursor-pointer"
+                  <button                    
+                    onClick={() => router.push('/combos/all')}
+                    className="bg-[var(--color-primario)] text-white px-8 py-3 rounded-lg font-bold text-lg hover:bg-[var(--color-hover)] transition-all duration-300 hover:scale-105 cursor-pointer"
                   >
-                    Ver Promociones de Stock
+                    Ver Productos
                   </button>
                 </div>
               </div>
@@ -413,7 +424,7 @@ export default function Page() {
                   <button
                     key={index}
                     onClick={() => goToSlide(index)}
-                    className={`transition duration-300 ${index === currentSlide ? 'bg-[#039dbf] w-8 h-3 rounded-full' : 'bg-white/50 hover:bg-white w-3 h-3 rounded-full'
+                    className={`transition duration-300 ${index === currentSlide ? 'bg-[var(--color-primario)] w-8 h-3 rounded-full' : 'bg-white/50 hover:bg-white w-3 h-3 rounded-full'
                       }`}
                     aria-label={`Ir a la diapositiva ${index + 1}`}
                     aria-current={index === currentSlide ? 'true' : 'false'}
@@ -430,7 +441,7 @@ export default function Page() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
               {/* Garantía */}
               <div className="flex items-start space-x-4">
-                <Shield className="w-8 h-8 text-[#039dbf] flex-shrink-0 mt-1" />
+                <Shield className="w-8 h-8 text-[var(--color-primario)] flex-shrink-0 mt-1" />
                 <div>
                   <h3 className="font-bold text-lg mb-1">1 Año de Garantía de Fábrica</h3>
                   <p className="text-sm text-gray-300">Equipos confiables preparados para uso profesional continuo</p>
@@ -438,7 +449,7 @@ export default function Page() {
               </div>
               {/* Envíos */}
               <div className="flex items-start space-x-4">
-                <Truck className="w-8 h-8 text-[#039dbf] flex-shrink-0 mt-1" />
+                <Truck className="w-8 h-8 text-[var(--color-primario)] flex-shrink-0 mt-1" />
                 <div>
                   <h3 className="font-bold text-lg mb-1">Envíos a Todo el Perú</h3>
                   <p className="text-sm text-gray-300">Despachos nacionales por: Marvisur, Shalom, Flores, etc.</p>
@@ -452,8 +463,8 @@ export default function Page() {
         <section id="nosotros" className="py-14 sm:py-20 lg:py-24 bg-[#111827] min-h-[85vh] scroll-mt-14">
           <style>{`
             @keyframes respirarTarjetaNosotros {
-              0%, 100% { border-color: rgb(31 41 55); box-shadow: 0 0 0 rgba(3, 157, 191, 0); }
-              50% { border-color: rgba(3, 157, 191, 0.45); box-shadow: 0 0 24px rgba(3, 157, 191, 0.18); }
+              0%, 100% { border-color: rgb(31 41 55); box-shadow: 0 0 0 rgba(0, 0, 0, 0); }
+              50% { border-color: ${THEME_CONFIG.gradiente_respirar_borde}; box-shadow: 0 0 24px ${THEME_CONFIG.gradiente_respirar_sombra}; }
             }
             .tarjeta-nosotros-respirando {
               animation: respirarTarjetaNosotros 4s ease-in-out infinite;
@@ -463,7 +474,7 @@ export default function Page() {
             <div className="text-center mb-12 sm:mb-16 lg:mb-20">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-2 sm:mb-4">Nosotros</h2>
               <p className="text-gray-400 text-sm sm:text-base lg:text-lg">En APIC diseñamos y fabricamos equipos para la industria audiovisual y el sector de eventos. Con más de 10 años de experiencia, desarrollamos soluciones innovadoras, confiables y de alta calidad, pensadas para ofrecer el máximo rendimiento en un uso profesional</p>
-              <div className="w-20 h-1 bg-[#039dbf] mx-auto mt-4 sm:mt-6"></div>
+              <div className="w-20 h-1 bg-[var(--color-primario)] mx-auto mt-4 sm:mt-6"></div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
@@ -471,20 +482,20 @@ export default function Page() {
                 <div
                   key={idx}
                   onMouseMove={handleMetricCardMouseMove}
-                  className="tarjeta-nosotros-respirando relative group bg-gradient-to-br from-[#1f2937] to-[#0b0f19] rounded-xl border border-[#1f2937] hover:border-[#039dbf] transition-all duration-300 overflow-hidden"
+                  className="tarjeta-nosotros-respirando relative group bg-gradient-to-br from-[#1f2937] to-[#0b0f19] rounded-xl border border-[#1f2937] hover:border-[var(--color-primario)] transition-all duration-300 overflow-hidden"
                   style={{ ['--mouse-x' as any]: '50%', ['--mouse-y' as any]: '50%', animationDelay: `${idx * 0.6}s` }}
                 >
                   <div
                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
                     style={{
-                      background: 'radial-gradient(circle at var(--mouse-x) var(--mouse-y), rgba(3, 157, 191, 0.35), transparent 60%)',
+                      background: `radial-gradient(circle at var(--mouse-x) var(--mouse-y), ${THEME_CONFIG.gradiente_sheen}, transparent 60%)`,
                     }}
                   ></div>
 
                   <div className="relative z-10 flex flex-col items-center justify-center text-center h-full min-h-[220px] p-6 sm:p-8">
                     <div className="mb-4 sm:mb-6">
-                      <span className="text-4xl sm:text-5xl lg:text-6xl font-black text-[#039dbf] drop-shadow-lg" style={{
-                        textShadow: '0 0 20px rgba(3, 157, 191, 0.5)'
+                      <span className="text-4xl sm:text-5xl lg:text-6xl font-black text-[var(--color-primario)] drop-shadow-lg" style={{
+                        textShadow: `0 0 20px ${THEME_CONFIG.gradiente_sheen}`
                       }}>
                         {metrica.numero}
                       </span>
@@ -495,7 +506,7 @@ export default function Page() {
                     </p>
                   </div>
 
-                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#039dbf] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[var(--color-primario)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
               ))}
             </div>
@@ -510,7 +521,7 @@ export default function Page() {
             <div className="text-center mb-12 sm:mb-16">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0b0f19] mb-4">Promociones de Stock</h2>
               <p className="text-gray-500 max-w-2xl mx-auto">Una selección de nuestros equipos de entrada con el mejor precio. Para ver todos los combos de cada familia, visita nuestro catálogo completo.</p>
-              <div className="w-20 h-1 bg-[#039dbf] mx-auto mt-4 sm:mt-6"></div>
+              <div className="w-20 h-1 bg-[var(--color-primario)] mx-auto mt-4 sm:mt-6"></div>
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
@@ -523,19 +534,19 @@ export default function Page() {
                   <div
                     key={product.id}
                     onClick={() => router.push('/productos/' + product.id)}
-                    className="group bg-gray-50 rounded-xl shadow-sm border border-gray-200 flex flex-col h-full transition-all duration-300 hover:scale-[1.03] hover:shadow-md hover:border-[#039dbf]/50 cursor-pointer"
+                    className="group bg-gray-50 rounded-xl shadow-sm border border-gray-200 flex flex-col h-full transition-all duration-300 hover:scale-[1.03] hover:shadow-md hover:border-[var(--color-primario)]/50 cursor-pointer"
                   >
                     <div className="relative h-36 sm:h-44 w-full overflow-hidden rounded-t-xl bg-white">
                       {badge && (
                         <span
                           className="absolute top-2 right-2 z-10 px-2.5 py-1 rounded-full text-[10px] sm:text-xs font-bold text-white shadow-md"
-                          style={{ backgroundColor: '#039dbf' }}
+                          style={{ backgroundColor: THEME_CONFIG.color_primario }}
                         >
                           {badge}
                         </span>
                       )}
                       {product.en_oferta && (
-                        <span className="absolute bottom-2 right-2 z-10 px-2 py-0.5 rounded text-[10px] font-semibold text-white bg-slate-900/85 border border-white/10 tracking-wide">
+                        <span className="absolute bottom-2 right-2 z-10 px-2 py-0.5 rounded text-[10px] font-semibold text-white border border-white/10 tracking-wide" style={{ backgroundColor: `${THEME_CONFIG.color_badge_oferta}D9` }}>
                           {descuento ? `-${descuento}%` : 'OFERTA'}
                         </span>
                       )}
@@ -552,7 +563,7 @@ export default function Page() {
                         <ul className="space-y-1">
                           {specsPreview.slice(0, 2).map((spec, idx) => (
                             <li key={idx} className="text-xs text-gray-600 flex items-start">
-                              <span className="w-2 h-px bg-[#039dbf] mt-2 mr-2 flex-shrink-0"></span>
+                              <span className="w-2 h-px bg-[var(--color-primario)] mt-2 mr-2 flex-shrink-0"></span>
                               <span className="truncate min-w-0 flex-1">{spec}</span>
                             </li>
                           ))}
@@ -561,7 +572,7 @@ export default function Page() {
                           <ul className="space-y-1">
                             {specsPreview.map((spec, idx) => (
                               <li key={idx} className="text-[11px] text-gray-700 flex items-start">
-                                <span className="w-2 h-px bg-[#039dbf] mt-2 mr-2 flex-shrink-0"></span>
+                                <span className="w-2 h-px bg-[var(--color-primario)] mt-2 mr-2 flex-shrink-0"></span>
                                 <span>{spec}</span>
                               </li>
                             ))}
@@ -580,7 +591,7 @@ export default function Page() {
                                   {product.precio_antes.split(':')[1]?.trim()}
                                 </span>
                               )}
-                              <p className="text-base sm:text-lg font-bold" style={{ color: '#039dbf' }}>{valorPrecio}</p>
+                              <p className="text-base sm:text-lg font-bold" style={{ color: THEME_CONFIG.color_primario }}>{valorPrecio}</p>
                             </div>
                           </div>
                         )
@@ -592,7 +603,7 @@ export default function Page() {
                         }}
                         className={`w-full py-1.5 sm:py-2 rounded text-xs sm:text-sm font-semibold transition-all duration-300 ${selectedItems.includes(product.nombre)
                           ? 'bg-red-600 hover:bg-red-700 text-white'
-                          : 'bg-[#039dbf] hover:bg-[#02829e] text-white'
+                          : 'bg-[var(--color-primario)] hover:bg-[var(--color-hover)] text-white'
                           }`}
                         aria-label={selectedItems.includes(product.nombre) ? `Quitar ${product.nombre}` : `Añadir ${product.nombre}`}
                       >
@@ -649,7 +660,7 @@ export default function Page() {
                       {selectedItems.map((item, idx) => (
                         <li key={idx} className="text-gray-700 flex items-center justify-between">
                           <span className="flex items-center">
-                            <span className="w-3 h-px bg-[#039dbf] mr-3 flex-shrink-0"></span>
+                            <span className="w-3 h-px bg-[var(--color-primario)] mr-3 flex-shrink-0"></span>
                             {item}
                           </span>
                           <button
@@ -665,7 +676,7 @@ export default function Page() {
 
                   <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
                     <p className="text-gray-700 text-sm">
-                      <span className="text-[#039dbf] font-semibold">Total de equipos:</span> {selectedItems.length}
+                      <span className="text-[var(--color-primario)] font-semibold">Total de equipos:</span> {selectedItems.length}
                     </p>
                   </div>
 
@@ -673,7 +684,7 @@ export default function Page() {
                     href={whatsappLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full bg-[#039dbf] text-white py-4 rounded-lg font-bold text-center hover:bg-[#02829e] transition flex items-center justify-center gap-2"
+                    className="w-full bg-[var(--color-primario)] text-white py-4 rounded-lg font-bold text-center hover:bg-[var(--color-hover)] transition flex items-center justify-center gap-2"
                   >
                     <MessageCircle className="w-5 h-5" />
                     <span>Enviar Cotización por WhatsApp</span>
@@ -706,7 +717,7 @@ export default function Page() {
 
 
       {/* ===== FOOTER / CONTACTO ===== */}
-      <footer id="contacto" className="bg-[#0b0f19] text-white py-14 sm:py-20 border-t border-gray-800 min-h-[80vh] scroll-mt-14" role="contentinfo">
+      <footer id="contacto" className="bg-[#0b0f19] text-white py-14 sm:py-20 border-t border-[var(--color-primario)]/20 min-h-[80vh] scroll-mt-14" role="contentinfo">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 lg:gap-6 mb-12 sm:mb-16">
             <div className="max-sm:text-center max-sm:flex max-sm:flex-col max-sm:items-center">
@@ -724,31 +735,31 @@ export default function Page() {
             </div>
 
             <div className="max-sm:text-center">
-              <h4 className="text-sm sm:text-base font-bold mb-6 uppercase tracking-wider text-[#039dbf]">Navegación</h4>
+              <h4 className="text-sm sm:text-base font-bold mb-6 uppercase tracking-wider text-[var(--color-primario)]">Navegación</h4>
               <ul className="space-y-3 text-gray-400 text-sm">
-                <li><a href="#" onClick={(e) => { e.preventDefault(); smoothScrollToElement('inicio') }} className="hover:text-[#039dbf] transition cursor-pointer">Inicio</a></li>
-                <li><a href="#" onClick={(e) => { e.preventDefault(); smoothScrollToElement('nosotros') }} className="hover:text-[#039dbf] transition cursor-pointer">Nosotros</a></li>
-                <li><a href="#" onClick={(e) => { e.preventDefault(); router.push('/combos/all') }} className="hover:text-[#039dbf] transition cursor-pointer">Productos</a></li>
-                <li><a href="#" onClick={(e) => { e.preventDefault(); smoothScrollToElement('contacto') }} className="hover:text-[#039dbf] transition cursor-pointer">Contacto</a></li>
+                <li><a href="#" onClick={(e) => { e.preventDefault(); smoothScrollToElement('inicio') }} className="hover:text-[var(--color-primario)] transition cursor-pointer">Inicio</a></li>
+                <li><a href="#" onClick={(e) => { e.preventDefault(); smoothScrollToElement('nosotros') }} className="hover:text-[var(--color-primario)] transition cursor-pointer">Nosotros</a></li>
+                <li><a href="#" onClick={(e) => { e.preventDefault(); router.push('/combos/all') }} className="hover:text-[var(--color-primario)] transition cursor-pointer">Productos</a></li>
+                <li><a href="#" onClick={(e) => { e.preventDefault(); smoothScrollToElement('contacto') }} className="hover:text-[var(--color-primario)] transition cursor-pointer">Contacto</a></li>
               </ul>
             </div>
 
             <div className="max-sm:text-center max-sm:flex max-sm:flex-col max-sm:items-center">
-              <h4 className="text-sm sm:text-base font-bold mb-6 uppercase tracking-wider text-[#039dbf]">Contacto</h4>
+              <h4 className="text-sm sm:text-base font-bold mb-6 uppercase tracking-wider text-[var(--color-primario)]">Contacto</h4>
               <ul className="space-y-3 text-gray-400 text-sm">
                 <li className="flex items-center gap-2 max-sm:justify-center">
-                  <Phone className="w-4 h-4 text-[#039dbf]" />
+                  <Phone className="w-4 h-4 text-[var(--color-primario)]" />
                   +{WEBSITE_CONFIG.numero_whatsapp_m}
                 </li>
                 <li className="flex items-center gap-2 max-sm:justify-center">
-                  <Mail className="w-4 h-4 text-[#039dbf]" />
+                  <Mail className="w-4 h-4 text-[var(--color-primario)]" />
                   {WEBSITE_CONFIG.correo_contacto}
                 </li>
               </ul>
             </div>
 
             <div className="max-sm:text-center max-sm:flex max-sm:flex-col max-sm:items-center">
-              <h4 className="text-sm sm:text-base font-bold mb-6 uppercase tracking-wider text-[#039dbf]">Síguenos</h4>
+              <h4 className="text-sm sm:text-base font-bold mb-6 uppercase tracking-wider text-[var(--color-primario)]">Síguenos</h4>
               <div className="flex gap-3 max-sm:justify-center">
 
                 {/* 🎵 TIKTOK (SVG Oficial) */}
@@ -756,7 +767,7 @@ export default function Page() {
                   href={redes_sociales.tiktok}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-lg bg-[#1f2937] hover:bg-[#039dbf] transition flex items-center justify-center text-white cursor-pointer"
+                  className="w-10 h-10 rounded-lg bg-[#1f2937] hover:bg-[var(--color-primario)] transition flex items-center justify-center text-white cursor-pointer"
                   aria-label="TikTok"
                 >
                   <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24" xmlns="http://w3.org">
@@ -769,7 +780,7 @@ export default function Page() {
                   href={redes_sociales.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-lg bg-[#1f2937] hover:bg-[#039dbf] transition flex items-center justify-center text-white cursor-pointer"
+                  className="w-10 h-10 rounded-lg bg-[#1f2937] hover:bg-[var(--color-primario)] transition flex items-center justify-center text-white cursor-pointer"
                   aria-label="Instagram"
                 >
                   <svg className="w-5 h-5 fill-none stroke-current" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" xmlns="http://w3.org">
@@ -784,7 +795,7 @@ export default function Page() {
                   href={redes_sociales.facebook}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-lg bg-[#1f2937] hover:bg-[#039dbf] transition flex items-center justify-center text-white cursor-pointer"
+                  className="w-10 h-10 rounded-lg bg-[#1f2937] hover:bg-[var(--color-primario)] transition flex items-center justify-center text-white cursor-pointer"
                   aria-label="Facebook"
                 >
                   <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24" xmlns="http://w3.org">
