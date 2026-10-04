@@ -57,6 +57,7 @@ export default function Page() {
   // Con un solo slide configurado no hay nada que rotar: el efecto no-opea
   // para no correr un intervalo inútil, pero queda listo para escalar
   // automáticamente en cuanto se agregue una segunda diapositiva.
+  
   useEffect(() => {
     if (!isHeroVisible || temporadas_carrusel.length <= 1) return
 

@@ -158,7 +158,7 @@ export const WEBSITE_CONFIG = {
           ],
           descripcion: 'Plataforma 360 — Combo 1. Peso: 25 kg. Costo: 2200 soles.', // Resumen corto, no se ve mucho en pantalla — puedes dejarlo simple
           descripcion_larga: 'Convierte cualquier celebración en contenido viral: tus invitados suben a la plataforma, extienden los brazos, y la cámara gira 360° capturando cada expresión en un solo video que todos querrán compartir.', // Texto comercial/emocional que se ve en la página de detalle del producto
-          imagenes_galeria: ['/equipos/PLATAFORMA-360º/COMBO 1/PLATAFORMA 360_IMG 1 PLAT 01.jpg', '/equipos/PLATAFORMA-360º/COMBO 1/PLATAFORMA 360_IMG 2 PLAT 01.jpg', '/equipos/PLATAFORMA-360º/COMBO 1/PLATAFORMA 360_IMG 3 PLAT 01.jpg'], // Rutas a fotos dentro de la carpeta /public del proyecto
+          imagenes_galeria: ['/equipos/PLATAFORMA-360º/COMBO 1/PLATAFORMA 360_IMG 1 PLATT 01.jpg', '/equipos/PLATAFORMA-360º/COMBO 1/PLATAFORMA 360_IMG 2 PLAT 01.jpg', '/equipos/PLATAFORMA-360º/COMBO 1/PLATAFORMA 360_IMG 3 PLAT 01.jpg'], // Rutas a fotos dentro de la carpeta /public del proyecto
           sobre_la_marca: 'APIC es fabricante líder en soluciones audiovisuales con más de 10 años de experiencia en eventos de alto impacto.',
           garantias: [ // Preguntas y respuestas ('SÍ' / 'NO') que se ven en la pestaña "Garantías" del producto
             { pregunta: 'Garantía de fábrica APIC (1 año)', respuesta: 'SÍ' },
@@ -280,7 +280,7 @@ export const WEBSITE_CONFIG = {
           precio_antes: null,
         },
       ],
-    },
+    },// Fin de la familia "Plataforma 360"
     {
       id_seccion: 'plataforma-infinito',
       titulo_seccion: 'Plataforma Infinito',
@@ -460,7 +460,7 @@ export const WEBSITE_CONFIG = {
           precio_antes: null,
         },
       ],
-    },
+    },// Fin de la familia "Plataforma Infinito Holograma"
     {
       id_seccion: 'glass-booth',
       titulo_seccion: 'Glass Booth',
@@ -578,7 +578,7 @@ export const WEBSITE_CONFIG = {
           precio_antes: null,
         },
       ],
-    },
+    },// Fin de la familia "Túnel Pixel"
     {
       id_seccion: 'domos',
       titulo_seccion: 'Domos',
@@ -998,7 +998,7 @@ export const WEBSITE_CONFIG = {
           precio_antes: null,
         },
       ],
-    },
+    },// Fin de la familia "Cabina 180 Pro"
   ],
 
 
