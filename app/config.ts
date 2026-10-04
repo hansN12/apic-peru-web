@@ -165,8 +165,8 @@ export const WEBSITE_CONFIG = {
             { pregunta: 'Cobertura por defectos de fabricación', respuesta: 'SÍ' },           
             { pregunta: 'Reemplazo por daño de uso indebido', respuesta: 'NO' },
           ],
-          en_oferta: true, // 'true' = aparece en la sección "Liquidación de Stock" del Home. 'false' = producto normal
-          precio_antes: 'Precio Antes: 2600 soles', // Solo se usa si 'en_oferta' es 'true' — se muestra tachado junto al precio actual. Si 'en_oferta' es 'false', este valor debe ser 'null'
+          en_oferta: false, // 'true' = aparece en la sección "Liquidación de Stock" del Home. 'false' = producto normal
+          precio_antes: null, // Solo se usa si 'en_oferta' es 'true' — se muestra tachado junto al precio actual. Si 'en_oferta' es 'false', este valor debe ser 'null'
           // ⚠️ NOTA: este producto y otros 5 más quedaron marcados como ejemplo ilustrativo de la
           // función "oferta" en una sesión de trabajo anterior — revisa qué productos quieres
           // poner realmente en oferta y con qué precio anterior antes de publicar el sitio.
@@ -488,8 +488,8 @@ export const WEBSITE_CONFIG = {
             { pregunta: 'Cobertura por defectos de fabricación', respuesta: 'SÍ' },
             { pregunta: 'Reemplazo por daño de uso indebido', respuesta: 'NO' },
           ],
-          en_oferta: true,
-          precio_antes: 'Precio Antes: 1800 soles',
+          en_oferta: false,
+          precio_antes: null,
         },
       ],
     },
@@ -519,8 +519,8 @@ export const WEBSITE_CONFIG = {
             { pregunta: 'Cobertura por defectos de fabricación', respuesta: 'SÍ' },
             { pregunta: 'Reemplazo por daño de uso indebido', respuesta: 'NO' },
           ],
-          en_oferta: true,
-          precio_antes: 'Precio Antes: 1200 soles',
+          en_oferta: false,
+          precio_antes: null,
         },
         {
           id: 14,
@@ -755,8 +755,8 @@ export const WEBSITE_CONFIG = {
             { pregunta: 'Cobertura por defectos de fabricación', respuesta: 'SÍ' },
             { pregunta: 'Reemplazo por daño de uso indebido', respuesta: 'NO' },
           ],
-          en_oferta: true,
-          precio_antes: 'Precio Antes: 2500 soles',
+          en_oferta: false,
+          precio_antes: null,
         },
         {
           id: 22,
@@ -848,8 +848,8 @@ export const WEBSITE_CONFIG = {
             { pregunta: 'Cobertura por defectos de fabricación', respuesta: 'SÍ' },
             { pregunta: 'Reemplazo por daño de uso indebido', respuesta: 'NO' },
           ],
-          en_oferta: true,
-          precio_antes: 'Precio Antes: 250 soles',
+          en_oferta: false,
+          precio_antes: null,
         },
       ],
     },
@@ -877,8 +877,8 @@ export const WEBSITE_CONFIG = {
             { pregunta: 'Cobertura por defectos de fabricación', respuesta: 'SÍ' },
             { pregunta: 'Reemplazo por daño de uso indebido', respuesta: 'NO' },
           ],
-          en_oferta: true,
-          precio_antes: 'Precio Antes: 850 soles',
+          en_oferta: false,
+          precio_antes: null,
         },
         {
           id: 26,
