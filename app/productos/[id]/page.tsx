@@ -292,10 +292,12 @@ export default function ProductDetailPage() {
               {/* FICHA TÉCNICA */}
               {activeTab === 'tecnica' && (
                 <div className="space-y-0 border border-gray-200 rounded-lg overflow-hidden">
-                  {product.ficha_tecnica?.map((spec: any, idx: number) => {
-                    const [propName, propValue] = spec.label.includes(':')
-                      ? [spec.label.split(':')[0].trim(), spec.label.split(':')[1].trim()]
-                      : [spec.label, spec.valor]
+                  {/* 🔧 FICHA TÉCNICA DINÁMICA: una sola fuente de datos. Esta tabla ya no */}
+                  {/* lee un arreglo separado — se arma al vuelo dividiendo cada línea de */}
+                  {/* 'especificaciones' (formato 'Clave: Valor') por su primer ':'. */}
+                  {product.especificaciones?.map((spec: string, idx: number) => {
+                    const [propName, ...resto] = spec.split(':')
+                    const propValue = resto.join(':').trim()
 
                     return (
                       <div
@@ -305,7 +307,7 @@ export default function ProductDetailPage() {
                       >
                         <div className="flex-1 p-4 border-r border-gray-100">
                           <p className="font-bold text-sm" style={{ color: THEME_CONFIG.color_primario }}>
-                            {propName}
+                            {propName.trim()}
                           </p>
                         </div>
                         <div className="flex-1 p-4">

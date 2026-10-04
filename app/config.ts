@@ -109,8 +109,9 @@ export const WEBSITE_CONFIG = {
   // Tareas comunes:
   //   • Cambiar un precio → busca la línea que empieza con "Costo:" o
   //     "Precio:" dentro de 'especificaciones' DEL COMBO QUE QUIERES
-  //     EDITAR, y también dentro de 'ficha_tecnica' (aparece dos veces,
-  //     cámbialo en ambos lugares para que coincidan en toda la web).
+  //     EDITAR. Esa misma lista alimenta tanto las tarjetas del catálogo
+  //     como la pestaña "Ficha Técnica" del producto — se edita UNA SOLA
+  //     VEZ y se actualiza en toda la web automáticamente.
   //   • Poner un producto en oferta → cambia 'en_oferta' a 'true' y
   //     escribe el precio anterior en 'precio_antes' (ej: 'Precio Antes:
   //     2600 soles'). Para quitarlo de oferta, 'en_oferta' a 'false' y
@@ -153,29 +154,19 @@ export const WEBSITE_CONFIG = {
             'Garantía: 1 año',
             'Material: Metal',
             'Características: Caja de control de velocidad, control inalámbrico de 50 mts de alcance, transformador de 20v, soporte para celular',
-            'Costo: 2200 soles', // 👈 PRECIO ACTUAL — edítalo aquí Y en 'ficha_tecnica' más abajo
+            'Costo: 2200 soles', // 👈 PRECIO ACTUAL — este es el único lugar donde se edita
           ],
           descripcion: 'Plataforma 360 — Combo 1. Peso: 25 kg. Costo: 2200 soles.', // Resumen corto, no se ve mucho en pantalla — puedes dejarlo simple
           descripcion_larga: 'Convierte cualquier celebración en contenido viral: tus invitados suben a la plataforma, extienden los brazos, y la cámara gira 360° capturando cada expresión en un solo video que todos querrán compartir.', // Texto comercial/emocional que se ve en la página de detalle del producto
           imagenes_galeria: ['/equipos/PLATAFORMA-360º/COMBO 1/PLATAFORMA 360_IMG 1 PLAT 01.jpg', '/equipos/PLATAFORMA-360º/COMBO 1/PLATAFORMA 360_IMG 2 PLAT 01.jpg', '/equipos/PLATAFORMA-360º/COMBO 1/PLATAFORMA 360_IMG 3 PLAT 01.jpg'], // Rutas a fotos dentro de la carpeta /public del proyecto
           sobre_la_marca: 'APIC es fabricante líder en soluciones audiovisuales con más de 10 años de experiencia en eventos de alto impacto.',
-          ficha_tecnica: [ // La misma información que 'especificaciones', pero en formato tabla (pestaña "Ficha Técnica" del producto)
-            { label: 'Peso', valor: '25 kg' },
-            { label: 'Medida', valor: '1 metro de diámetro' },
-            { label: 'Capacidad', valor: '4-5 personas' },
-            { label: 'Color', valor: 'Negro' },
-            { label: 'Garantía', valor: '1 año' },
-            { label: 'Material', valor: 'Metal' },
-            { label: 'Características', valor: 'Caja de control de velocidad, control inalámbrico de 50 mts de alcance, transformador de 20v, soporte para celular' },
-            { label: 'Costo', valor: '2200 soles' }, // 👈 Debe ser IGUAL al "Costo:" de 'especificaciones' arriba
-          ],
           garantias: [ // Preguntas y respuestas ('SÍ' / 'NO') que se ven en la pestaña "Garantías" del producto
             { pregunta: 'Garantía de fábrica APIC (1 año)', respuesta: 'SÍ' },
             { pregunta: 'Cobertura por defectos de fabricación', respuesta: 'SÍ' },           
             { pregunta: 'Reemplazo por daño de uso indebido', respuesta: 'NO' },
           ],
           en_oferta: true, // 'true' = aparece en la sección "Liquidación de Stock" del Home. 'false' = producto normal
-          precio_antes: 'Precio Antes: 2600 soles', // Solo se usa si 'en_oferta' es 'true' — se muestra tachado junto al precio actual. Si 'en_oferta' es 'false', este valor debe ser 'null' y si es 'true', debe contener el precio anterior (ej: 'Precio Antes: x soles').
+          precio_antes: 'Precio Antes: 2600 soles', // Solo se usa si 'en_oferta' es 'true' — se muestra tachado junto al precio actual. Si 'en_oferta' es 'false', este valor debe ser 'null'
           // ⚠️ NOTA: este producto y otros 5 más quedaron marcados como ejemplo ilustrativo de la
           // función "oferta" en una sesión de trabajo anterior — revisa qué productos quieres
           // poner realmente en oferta y con qué precio anterior antes de publicar el sitio.
@@ -199,16 +190,6 @@ export const WEBSITE_CONFIG = {
           descripcion_larga: 'La misma magia del giro, ahora con el brillo del aro LED RGB y tu marca personalizada en vinil — cada clip sale listo para redes sociales, con la identidad de tu evento en cada fotograma.',
           imagenes_galeria: ['/equipos/PLATAFORMA-360º/COMBO 2/PLATAFORMA 360_IMG 1 PLAT 02.jpg', '/equipos/PLATAFORMA-360º/COMBO 2/PLATAFORMA 360_IMG 2 PLAT 02.jpg', '/equipos/PLATAFORMA-360º/COMBO 2/PLATAFORMA 360_IMG 3 PLAT 02.jpg', '/equipos/PLATAFORMA-360º/COMBO 2/PLATAFORMA 360_IMG 4 PLAT 02.jpg', '/equipos/PLATAFORMA-360º/COMBO 2/PLATAFORMA 360_IMG 5 PLAT 02.jpg'],
           sobre_la_marca: 'APIC es fabricante líder en soluciones audiovisuales con más de 10 años de experiencia en eventos de alto impacto.',
-          ficha_tecnica: [
-            { label: 'Peso', valor: '25 kg' },
-            { label: 'Medida', valor: '1 metro de diámetro' },
-            { label: 'Capacidad', valor: '4-5 personas' },
-            { label: 'Color', valor: 'Negro' },
-            { label: 'Garantía', valor: '1 año' },
-            { label: 'Material', valor: 'Metal' },
-            { label: 'Características', valor: 'Caja de control de velocidad, control inalámbrico de 50 mts de alcance, transformador de 20v, soporte para celular, aro LED RGB, LED decorativa, vinil con el logo de su empresa personalizado' },
-            { label: 'Costo', valor: '2300 soles' },
-          ],
           garantias: [
             { pregunta: 'Garantía de fábrica APIC (1 año)', respuesta: 'SÍ' },
             { pregunta: 'Cobertura por defectos de fabricación', respuesta: 'SÍ' },
@@ -236,16 +217,6 @@ export const WEBSITE_CONFIG = {
           descripcion_larga: 'Iluminación profesional de barras LED que elimina cualquier sombra: el resultado luce con calidad de producción audiovisual, no de video casero.',
           imagenes_galeria: ['/equipos/PLATAFORMA-360º/COMBO 3/PLATAFORMA 360_IMG 1 PLAT 03.jpg', '/equipos/PLATAFORMA-360º/COMBO 3/PLATAFORMA 360_IMG 2 PLAT 03.jpg', '/equipos/PLATAFORMA-360º/COMBO 3/PLATAFORMA 360_IMG 3 PLAT 03.jpg', '/equipos/PLATAFORMA-360º/COMBO 3/PLATAFORMA 360_IMG 4 PLAT 03.jpg', '/equipos/PLATAFORMA-360º/COMBO 3/PLATAFORMA 360_IMG 5 PLAT 03.jpg', '/equipos/PLATAFORMA-360º/COMBO 3/PLATAFORMA 360_IMG 6 PLAT 03.jpg'],
           sobre_la_marca: 'APIC es fabricante líder en soluciones audiovisuales con más de 10 años de experiencia en eventos de alto impacto.',
-          ficha_tecnica: [
-            { label: 'Peso', valor: '25 kg' },
-            { label: 'Medida', valor: '1 metro de diámetro' },
-            { label: 'Capacidad', valor: '4-5 personas' },
-            { label: 'Color', valor: 'Negro' },
-            { label: 'Garantía', valor: '1 año' },
-            { label: 'Material', valor: 'Metal' },
-            { label: 'Características', valor: 'Caja de control de velocidad, control inalámbrico de 50 mts de alcance, transformador de 20v, soporte para celular, aro LED RGB, LED decorativa, vinil con el logo de su empresa personalizado, 4 barras LED blancas con enchufe y cable de 2 mts (75w c/u), 4 trípodes para soporte de barras' },
-            { label: 'Costo', valor: '2500 soles' },
-          ],
           garantias: [
             { pregunta: 'Garantía de fábrica APIC (1 año)', respuesta: 'SÍ' },
             { pregunta: 'Cobertura por defectos de fabricación', respuesta: 'SÍ' },
@@ -273,16 +244,6 @@ export const WEBSITE_CONFIG = {
           descripcion_larga: 'Niebla y burbujas convierten cada toma en una escena cinematográfica — el efecto sorpresa está garantizado desde el primer segundo de grabación.',
           imagenes_galeria: ['/equipos/PLATAFORMA-360º/COMBO 4/PLATAFORMA 360_IMG 1 PLAT 04.jpg', '/equipos/PLATAFORMA-360º/COMBO 4/PLATAFORMA 360_IMG 2 PLAT 04.jpg', '/equipos/PLATAFORMA-360º/COMBO 4/PLATAFORMA 360_IMG 3 PLAT 04.jpg', '/equipos/PLATAFORMA-360º/COMBO 4/PLATAFORMA 360_IMG 4 PLAT 04.jpg', '/equipos/PLATAFORMA-360º/COMBO 4/PLATAFORMA 360_IMG 5 PLAT 04-13.jpg', '/equipos/PLATAFORMA-360º/COMBO 4/PLATAFORMA 360_IMG 6 PLAT 04-21.jpg'],
           sobre_la_marca: 'APIC es fabricante líder en soluciones audiovisuales con más de 10 años de experiencia en eventos de alto impacto.',
-          ficha_tecnica: [
-            { label: 'Peso', valor: '25 kg' },
-            { label: 'Medida', valor: '1 metro de diámetro' },
-            { label: 'Capacidad', valor: '4-5 personas' },
-            { label: 'Color', valor: 'Negro' },
-            { label: 'Garantía', valor: '1 año' },
-            { label: 'Material', valor: 'Metal' },
-            { label: 'Características', valor: 'Caja de control de velocidad, control inalámbrico de 50 mts de alcance, transformador de 20v, soporte para celular, aro LED RGB, LED decorativa, vinil con el logo de su empresa personalizado, 4 barras LED blancas con enchufe y cable de 2 mts (75w c/u), 4 trípodes para soporte de barras, máquina de humo (control inalámbrico), máquina de burbuja, 500ml de líquido para humo, 500ml de líquido de burbuja' },
-            { label: 'Costo', valor: '3100 soles' },
-          ],
           garantias: [
             { pregunta: 'Garantía de fábrica APIC (1 año)', respuesta: 'SÍ' },
             { pregunta: 'Cobertura por defectos de fabricación', respuesta: 'SÍ' },
@@ -310,16 +271,6 @@ export const WEBSITE_CONFIG = {
           descripcion_larga: 'La experiencia completa, lista para viajar: power bank, carrito de transporte y estuche acolchado para que el espectáculo esté listo en cualquier locación, sin depender de un tomacorriente.',
           imagenes_galeria: ['/equipos/PLATAFORMA-360º/COMBO 5/PLATAFORMA 360_IMG 1 PLAT 05.jpg', '/equipos/PLATAFORMA-360º/COMBO 5/PLATAFORMA 360_IMG 2 PLAT 05.jpg', '/equipos/PLATAFORMA-360º/COMBO 5/PLATAFORMA 360_IMG 3 PLAT 05.jpg', '/equipos/PLATAFORMA-360º/COMBO 5/PLATAFORMA 360_IMG 4 PLAT 05.jpg', '/equipos/PLATAFORMA-360º/COMBO 5/PLATAFORMA 360_IMG 5 PLAT 05.jpg', '/equipos/PLATAFORMA-360º/COMBO 5/PLATAFORMA 360_IMG 6 PLAT 05-18.jpg', '/equipos/PLATAFORMA-360º/COMBO 5/PLATAFORMA 360_IMG 6 PLAT 05-22.jpg'],
           sobre_la_marca: 'APIC es fabricante líder en soluciones audiovisuales con más de 10 años de experiencia en eventos de alto impacto.',
-          ficha_tecnica: [
-            { label: 'Peso', valor: '25 kg' },
-            { label: 'Medida', valor: '1 metro de diámetro' },
-            { label: 'Capacidad', valor: '4-5 personas' },
-            { label: 'Color', valor: 'Negro' },
-            { label: 'Garantía', valor: '1 año' },
-            { label: 'Material', valor: 'Metal' },
-            { label: 'Características', valor: 'Caja de control de velocidad, control inalámbrico de 50 mts de alcance, transformador de 20v, soporte para celular, aro LED RGB, LED decorativa, vinil con el logo de su empresa personalizado, 4 barras LED blancas con enchufe y cable de 2 mts (75w c/u), 4 trípodes para soporte de barras, máquina de humo (control inalámbrico), máquina de burbuja, 500ml de líquido para humo, 500ml de líquido de burbuja, estuche de lona acolchado de 1 mt, carrito de fierro con 4 ruedas para transportar la plataforma, power bank' },
-            { label: 'Costo', valor: '3600 soles' },
-          ],
           garantias: [
             { pregunta: 'Garantía de fábrica APIC (1 año)', respuesta: 'SÍ' },
             { pregunta: 'Cobertura por defectos de fabricación', respuesta: 'SÍ' },
@@ -354,17 +305,6 @@ export const WEBSITE_CONFIG = {
           descripcion_larga: 'El piso de vidrio templado añade una dimensión de profundidad que transforma el giro clásico en una experiencia visualmente hipnótica — como flotar en el aire.',
           imagenes_galeria: ['/equipos/INFINITA/COMBO 1/INFINITA_INFINITO COMBO 1 IMG1.jpg', '/equipos/INFINITA/COMBO 1/INFINITA_INFINITO COMBO 1 IMG2.jpg'],
           sobre_la_marca: 'APIC es fabricante líder en soluciones audiovisuales con más de 10 años de experiencia en eventos de alto impacto.',
-          ficha_tecnica: [
-            { label: 'Peso', valor: '35 kg' },
-            { label: 'Medida', valor: '1 metro de diámetro' },
-            { label: 'Capacidad', valor: '4-5 personas' },
-            { label: 'Color', valor: 'Negro' },
-            { label: 'Garantía', valor: '1 año' },
-            { label: 'Material', valor: 'Metal' },
-            { label: 'Vidrio', valor: 'Templado de 10mm' },
-            { label: 'Características', valor: 'Caja de control de velocidad, control inalámbrico de 50 mts de alcance, transformador de 20v, soporte para celular, power bank, 1 aro LED RGB blanco y cálido' },
-            { label: 'Costo', valor: '3050 soles' },
-          ],
           garantias: [
             { pregunta: 'Garantía de fábrica APIC (1 año)', respuesta: 'SÍ' },
             { pregunta: 'Cobertura por defectos de fabricación', respuesta: 'SÍ' },
@@ -393,17 +333,6 @@ export const WEBSITE_CONFIG = {
           descripcion_larga: 'Con iluminación adicional perfectamente distribuida, cada video luce un acabado profesional que hace que los invitados quieran repetir la toma una y otra vez.',
           imagenes_galeria: ['/equipos/INFINITA/COMBO 2/INFINITA_INFINITO COMBO 2 IMG1.jpg', '/equipos/INFINITA/COMBO 2/INFINITA_INFINITO COMBO 2 IMG2.jpg', '/equipos/INFINITA/COMBO 2/INFINITA_INFINITO COMBO 2 IMG3.jpg'],
           sobre_la_marca: 'APIC es fabricante líder en soluciones audiovisuales con más de 10 años de experiencia en eventos de alto impacto.',
-          ficha_tecnica: [
-            { label: 'Peso', valor: '35 kg' },
-            { label: 'Medida', valor: '1 metro de diámetro' },
-            { label: 'Capacidad', valor: '4-5 personas' },
-            { label: 'Color', valor: 'Negro' },
-            { label: 'Garantía', valor: '1 año' },
-            { label: 'Material', valor: 'Metal' },
-            { label: 'Vidrio', valor: 'Templado de 10mm' },
-            { label: 'Características', valor: 'Caja de control de velocidad, control inalámbrico de 50 mts de alcance, transformador de 20v, soporte para celular, power bank, 1 aro LED RGB blanco y cálido, 4 trípodes para LED, 4 barras LED blancas netamente para iluminación' },
-            { label: 'Costo', valor: '3450 soles' },
-          ],
           garantias: [
             { pregunta: 'Garantía de fábrica APIC (1 año)', respuesta: 'SÍ' },
             { pregunta: 'Cobertura por defectos de fabricación', respuesta: 'SÍ' },
@@ -432,17 +361,6 @@ export const WEBSITE_CONFIG = {
           descripcion_larga: 'La niebla se desliza sobre el vidrio iluminado creando un efecto casi etéreo — el momento más fotografiado de la noche, garantizado.',
           imagenes_galeria: ['/equipos/INFINITA/COMBO 3/INFINITA_INFINITO COMBO 3 IMG1.jpg', '/equipos/INFINITA/COMBO 3/INFINITA_INFINITO COMBO 3 IMG2.jpg', '/equipos/INFINITA/COMBO 3/INFINITA_INFINITO COMBO 3 IMG3.jpg'],
           sobre_la_marca: 'APIC es fabricante líder en soluciones audiovisuales con más de 10 años de experiencia en eventos de alto impacto.',
-          ficha_tecnica: [
-            { label: 'Peso', valor: '35 kg' },
-            { label: 'Medida', valor: '1 metro de diámetro' },
-            { label: 'Capacidad', valor: '4-5 personas' },
-            { label: 'Color', valor: 'Negro' },
-            { label: 'Garantía', valor: '1 año' },
-            { label: 'Material', valor: 'Metal' },
-            { label: 'Vidrio', valor: 'Templado de 10mm' },
-            { label: 'Características', valor: 'Caja de control de velocidad, control inalámbrico de 50 mts de alcance, transformador de 20v, soporte para celular, power bank, 1 aro LED RGB blanco y cálido, 4 trípodes para LED, 4 barras LED blancas netamente para iluminación, máquina de humo, máquina de burbuja' },
-            { label: 'Costo', valor: '3750 soles' },
-          ],
           garantias: [
             { pregunta: 'Garantía de fábrica APIC (1 año)', respuesta: 'SÍ' },
             { pregunta: 'Cobertura por defectos de fabricación', respuesta: 'SÍ' },
@@ -477,17 +395,6 @@ export const WEBSITE_CONFIG = {
           descripcion_larga: 'Un holograma flotante de 40cm eleva el efecto giratorio a otro nivel: no solo se ve, se vive como un pequeño espectáculo de ciencia ficción en medio del evento.',
           imagenes_galeria: ['/imagenes/plataforma-infinito-holograma-combo-1-1.jpg', '/imagenes/plataforma-infinito-holograma-combo-1-2.jpg', '/imagenes/plataforma-infinito-holograma-combo-1-3.jpg', '/imagenes/plataforma-infinito-holograma-combo-1-4.jpg'],
           sobre_la_marca: 'APIC es fabricante líder en soluciones audiovisuales con más de 10 años de experiencia en eventos de alto impacto.',
-          ficha_tecnica: [
-            { label: 'Peso', valor: '35 kg' },
-            { label: 'Medida', valor: '1 metro de diámetro' },
-            { label: 'Capacidad', valor: '4-5 personas' },
-            { label: 'Color', valor: 'Negro' },
-            { label: 'Garantía', valor: '1 año' },
-            { label: 'Material', valor: 'Metal' },
-            { label: 'Vidrio', valor: 'Templado de 10mm' },
-            { label: 'Características', valor: 'Caja de control de velocidad, control inalámbrico de 50 mts de alcance, transformador de 20v, control para holograma, transformador de 12v para holograma, holograma de 40 cm, soporte para celular, power bank, 1 aro LED RGB blanco y cálido' },
-            { label: 'Costo', valor: '3600 soles' },
-          ],
           garantias: [
             { pregunta: 'Garantía de fábrica APIC (1 año)', respuesta: 'SÍ' },
             { pregunta: 'Cobertura por defectos de fabricación', respuesta: 'SÍ' },
@@ -516,17 +423,6 @@ export const WEBSITE_CONFIG = {
           descripcion_larga: 'Más luz, más presencia: la iluminación adicional envuelve el holograma y el piso de vidrio en un solo momento inolvidable para tus invitados.',
           imagenes_galeria: ['/imagenes/plataforma-infinito-holograma-combo-2-1.jpg', '/imagenes/plataforma-infinito-holograma-combo-2-2.jpg', '/imagenes/plataforma-infinito-holograma-combo-2-3.jpg', '/imagenes/plataforma-infinito-holograma-combo-2-4.jpg'],
           sobre_la_marca: 'APIC es fabricante líder en soluciones audiovisuales con más de 10 años de experiencia en eventos de alto impacto.',
-          ficha_tecnica: [
-            { label: 'Peso', valor: '35 kg' },
-            { label: 'Medida', valor: '1 metro de diámetro' },
-            { label: 'Capacidad', valor: '4-5 personas' },
-            { label: 'Color', valor: 'Negro' },
-            { label: 'Garantía', valor: '1 año' },
-            { label: 'Material', valor: 'Metal' },
-            { label: 'Vidrio', valor: 'Templado de 10mm' },
-            { label: 'Características', valor: 'Caja de control de velocidad, control inalámbrico de 50 mts de alcance, transformador de 20v, control para holograma, transformador de 12v para holograma, holograma de 40 cm, soporte para celular, power bank, 1 aro LED RGB blanco y cálido, 4 trípodes para iluminación, 4 barras LED netamente blancas para iluminación' },
-            { label: 'Costo', valor: '4000 soles' },
-          ],
           garantias: [
             { pregunta: 'Garantía de fábrica APIC (1 año)', respuesta: 'SÍ' },
             { pregunta: 'Cobertura por defectos de fabricación', respuesta: 'SÍ' },
@@ -555,17 +451,6 @@ export const WEBSITE_CONFIG = {
           descripcion_larga: 'El nivel más alto de nuestro catálogo: holograma, niebla y burbujas trabajando juntos para el cierre de evento más memorable que puedas ofrecer.',
           imagenes_galeria: ['/imagenes/plataforma-infinito-holograma-combo-3-1.jpg', '/imagenes/plataforma-infinito-holograma-combo-3-2.jpg', '/imagenes/plataforma-infinito-holograma-combo-3-3.jpg', '/imagenes/plataforma-infinito-holograma-combo-3-4.jpg'],
           sobre_la_marca: 'APIC es fabricante líder en soluciones audiovisuales con más de 10 años de experiencia en eventos de alto impacto.',
-          ficha_tecnica: [
-            { label: 'Peso', valor: '35 kg' },
-            { label: 'Medida', valor: '1 metro de diámetro' },
-            { label: 'Capacidad', valor: '4-5 personas' },
-            { label: 'Color', valor: 'Negro' },
-            { label: 'Garantía', valor: '1 año' },
-            { label: 'Material', valor: 'Metal' },
-            { label: 'Vidrio', valor: 'Templado de 10mm' },
-            { label: 'Características', valor: 'Caja de control de velocidad, control inalámbrico de 50 mts de alcance, transformador de 20v, control para holograma, transformador de 12v para holograma, holograma de 40 cm, soporte para celular, power bank, 1 aro LED RGB blanco y cálido, 4 trípodes para iluminación, 4 barras LED netamente blancas para iluminación, máquina de humo, máquina de burbuja' },
-            { label: 'Costo', valor: '4300 soles' },
-          ],
           garantias: [
             { pregunta: 'Garantía de fábrica APIC (1 año)', respuesta: 'SÍ' },
             { pregunta: 'Cobertura por defectos de fabricación', respuesta: 'SÍ' },
@@ -598,15 +483,6 @@ export const WEBSITE_CONFIG = {
           descripcion_larga: 'Un punto de branding que se convierte en la fotografía más compartida del evento: estructura minimalista y mica espejada, diseñada para que cada invitado se detenga a capturar el momento.',
           imagenes_galeria: ['/equipos/GLASS-BOOTH/INFINITY_GLASS IMG1.jpg'],
           sobre_la_marca: 'APIC es fabricante líder en soluciones audiovisuales con más de 10 años de experiencia en eventos de alto impacto.',
-          ficha_tecnica: [
-            { label: 'Estructura', valor: 'Desarmable, cuadrada, de 1.22 x 1.22 mt' },
-            { label: 'Altura', valor: '2 metros' },
-            { label: 'Plancha', valor: 'Negra para branding' },
-            { label: 'Barras', valor: 'Blancas para iluminación' },
-            { label: 'Forro', valor: 'Tela negra' },
-            { label: 'Mica', valor: 'Transparente de 60cm x 1.22cm, efecto espejo de 3mm de espesor' },
-            { label: 'Costo', valor: '1500 soles' },
-          ],
           garantias: [
             { pregunta: 'Garantía de fábrica APIC (1 año)', respuesta: 'SÍ' },
             { pregunta: 'Cobertura por defectos de fabricación', respuesta: 'SÍ' },
@@ -638,14 +514,6 @@ export const WEBSITE_CONFIG = {
           descripcion_larga: 'Una entrada que marca el tono del evento desde el primer paso: arcos hexagonales que convierten el simple hecho de caminar en una experiencia memorable.',
           imagenes_galeria: ['/equipos/TUNEL/COMBO 1/TUNEL_TÚNEL COMBO 1 IMG1.jpg', '/equipos/TUNEL/COMBO 1/TUNEL_TÚNEL COMBO 1 IMG2.jpg'],
           sobre_la_marca: 'APIC es fabricante líder en soluciones audiovisuales con más de 10 años de experiencia en eventos de alto impacto.',
-          ficha_tecnica: [
-            { label: 'Estructura', valor: 'Completamente desarmable' },
-            { label: 'Medidas', valor: '2.37 mt ancho x 2.10 mt alto x 5 mts de profundidad' },
-            { label: 'Material', valor: 'Acero cuadrado' },
-            { label: 'Color', valor: 'Negro' },
-            { label: 'Arcos', valor: '6 arcos hexagonales' },
-            { label: 'Costo', valor: '950 soles' },
-          ],
           garantias: [
             { pregunta: 'Garantía de fábrica APIC (1 año)', respuesta: 'SÍ' },
             { pregunta: 'Cobertura por defectos de fabricación', respuesta: 'SÍ' },
@@ -672,15 +540,6 @@ export const WEBSITE_CONFIG = {
           descripcion_larga: 'Con iluminación pixel en cada arco, el recorrido se vuelve una postal luminosa perfecta para las primeras fotos de la noche.',
           imagenes_galeria: ['/equipos/TUNEL/COMBO 2/TUNEL_TÚNEL COMBO 2 IMG1.jpg', '/equipos/TUNEL/COMBO 2/TUNEL_TÚNEL COMBO 2 IMG2.jpg', '/equipos/TUNEL/COMBO 2/TUNEL_TÚNEL COMBO 2 IMG3.jpg'],
           sobre_la_marca: 'APIC es fabricante líder en soluciones audiovisuales con más de 10 años de experiencia en eventos de alto impacto.',
-          ficha_tecnica: [
-            { label: 'Estructura', valor: 'Completamente desarmable' },
-            { label: 'Medidas', valor: '2.37 mt ancho x 2.10 mt alto x 5 mts de profundidad' },
-            { label: 'Material', valor: 'Acero cuadrado' },
-            { label: 'Color', valor: 'Negro' },
-            { label: 'Arcos', valor: '6 arcos hexagonales' },
-            { label: 'Iluminación', valor: '30 barras pixel con enchufe en cada arco' },
-            { label: 'Costo', valor: '2250 soles' },
-          ],
           garantias: [
             { pregunta: 'Garantía de fábrica APIC (1 año)', respuesta: 'SÍ' },
             { pregunta: 'Cobertura por defectos de fabricación', respuesta: 'SÍ' },
@@ -710,18 +569,6 @@ export const WEBSITE_CONFIG = {
           descripcion_larga: 'Sincronizado al ritmo de la música vía app, el túnel respira con el evento — cada beat se convierte en luz en tiempo real.',
           imagenes_galeria: ['/equipos/TUNEL/COMBO 3/TUNEL_TÚNEL COMBO 3 IMG1.jpg', '/equipos/TUNEL/COMBO 3/TUNEL_TÚNEL COMBO 3 IMG2.jpg', '/equipos/TUNEL/COMBO 3/TUNEL_TÚNEL COMBO 3 IMG3.jpg'],
           sobre_la_marca: 'APIC es fabricante líder en soluciones audiovisuales con más de 10 años de experiencia en eventos de alto impacto.',
-          ficha_tecnica: [
-            { label: 'Estructura', valor: 'Completamente desarmable' },
-            { label: 'Medidas', valor: '2.37 mt ancho x 2.10 mt alto x 5 mts de profundidad' },
-            { label: 'Material', valor: 'Acero cuadrado' },
-            { label: 'Color', valor: 'Negro' },
-            { label: 'Arcos', valor: '6 arcos hexagonales' },
-            { label: 'Iluminación', valor: '30 barras pixel' },
-            { label: 'Transformadores', valor: '6 transformadores de 12v' },
-            { label: 'Cableado', valor: '5 cables de empalme' },
-            { label: 'Control', valor: '1 controlador rítmico, controlable por app' },
-            { label: 'Costo', valor: '2650 soles' },
-          ],
           garantias: [
             { pregunta: 'Garantía de fábrica APIC (1 año)', respuesta: 'SÍ' },
             { pregunta: 'Cobertura por defectos de fabricación', respuesta: 'SÍ' },
@@ -754,15 +601,6 @@ export const WEBSITE_CONFIG = {
           descripcion_larga: 'Una estructura geodésica que redefine el espacio del evento: elegante, imponente, y lista para convertirse en el punto de encuentro de la noche.',
           imagenes_galeria: ['/equipos/DOMOS/DOMO 1/DOMOS_DOMO COMBO 1 - IMG1.jpg', '/equipos/DOMOS/DOMO 1/DOMOS_DOMO COMBO 1 - IMG2.jpg'],
           sobre_la_marca: 'APIC es fabricante líder en soluciones audiovisuales con más de 10 años de experiencia en eventos de alto impacto.',
-          ficha_tecnica: [
-            { label: 'Variante', valor: 'Domo Básico' },
-            { label: 'Medida armado', valor: '2.25 mt alto x 3.40 mt ancho' },
-            { label: 'Iluminación', valor: '35 barras LED blancas' },
-            { label: 'Piezas', valor: '16 piezas' },
-            { label: 'Cableado', valor: 'Incluido con empalmes' },
-            { label: 'Material', valor: 'Metal, fierro, tubo cuadrado' },
-            { label: 'Precio', valor: '2350 soles' },
-          ],
           garantias: [
             { pregunta: 'Garantía de fábrica APIC (1 año)', respuesta: 'SÍ' },
             { pregunta: 'Cobertura por defectos de fabricación', respuesta: 'SÍ' },
@@ -789,15 +627,6 @@ export const WEBSITE_CONFIG = {
           descripcion_larga: 'Con el doble de iluminación LED, el domo se convierte en un santuario luminoso que envuelve a tus invitados desde el primer momento.',
           imagenes_galeria: ['/equipos/DOMOS/DOMO 2/DOMOS_DOMO COMBO 2 - IMG1.jpg', '/equipos/DOMOS/DOMO 2/DOMOS_DOMO COMBO 2 - IMG2.jpg'],
           sobre_la_marca: 'APIC es fabricante líder en soluciones audiovisuales con más de 10 años de experiencia en eventos de alto impacto.',
-          ficha_tecnica: [
-            { label: 'Variante', valor: 'Domo Premium' },
-            { label: 'Medida armado', valor: '3 mt alto x 3.40 mt ancho' },
-            { label: 'Iluminación', valor: '65 barras LED blancas' },
-            { label: 'Piezas', valor: '21 piezas' },
-            { label: 'Cableado', valor: 'Incluido con empalmes' },
-            { label: 'Material', valor: 'Metal, fierro, tubo cuadrado' },
-            { label: 'Precio', valor: '3150 soles' },
-          ],
           garantias: [
             { pregunta: 'Garantía de fábrica APIC (1 año)', respuesta: 'SÍ' },
             { pregunta: 'Cobertura por defectos de fabricación', respuesta: 'SÍ' },
@@ -826,17 +655,6 @@ export const WEBSITE_CONFIG = {
           descripcion_larga: 'Barras pixel programables transforman el domo en un lienzo dinámico de luz y color, sincronizado a la energía del evento.',
           imagenes_galeria: ['/equipos/DOMOS/DOMO 3/DOMOS_DOMO COMBO 3 - IMG1.jpg', '/equipos/DOMOS/DOMO 3/DOMOS_DOMO COMBO 3 - IMG2.jpg'],
           sobre_la_marca: 'APIC es fabricante líder en soluciones audiovisuales con más de 10 años de experiencia en eventos de alto impacto.',
-          ficha_tecnica: [
-            { label: 'Variante', valor: 'Domo Premium Pixel' },
-            { label: 'Medida armado', valor: '3 mt alto x 3.40 mt ancho' },
-            { label: 'Iluminación', valor: '65 barras LED blancas + 51 barras pixel' },
-            { label: 'Control', valor: '1 controlador' },
-            { label: 'Transformadores', valor: '5 transformadores de 12v' },
-            { label: 'Piezas', valor: '21 piezas' },
-            { label: 'Cableado', valor: 'Incluido con empalmes' },
-            { label: 'Material', valor: 'Metal, fierro, tubo cuadrado' },
-            { label: 'Precio', valor: '5199 soles' },
-          ],
           garantias: [
             { pregunta: 'Garantía de fábrica APIC (1 año)', respuesta: 'SÍ' },
             { pregunta: 'Cobertura por defectos de fabricación', respuesta: 'SÍ' },
@@ -868,20 +686,6 @@ export const WEBSITE_CONFIG = {
           descripcion_larga: 'El brazo extendible añade una perspectiva aérea que documenta el evento como nunca antes se había visto — desde arriba, desde adentro del domo.',
           imagenes_galeria: ['/equipos/DOMOS/DOMO 4/DOMOS_DOMO COMBO 4 - IMG1.jpg', '/equipos/DOMOS/DOMO 4/DOMOS_DOMO COMBO 4 - IMG2.jpg', '/equipos/DOMOS/DOMO 4/DOMOS_DOMO COMBO 4 - IMG3.jpg', '/equipos/DOMOS/DOMO 4/DOMOS_DOMO COMBO 4 - IMG4.jpg'],
           sobre_la_marca: 'APIC es fabricante líder en soluciones audiovisuales con más de 10 años de experiencia en eventos de alto impacto.',
-          ficha_tecnica: [
-            { label: 'Variante', valor: 'Domo Aéreo' },
-            { label: 'Medida armado', valor: '3 mt alto x 3.40 mt ancho' },
-            { label: 'Iluminación', valor: '65 barras LED blancas' },
-            { label: 'Piezas', valor: '21 piezas' },
-            { label: 'Cableado', valor: 'Incluido con empalmes' },
-            { label: 'Material', valor: 'Metal, fierro, tubo cuadrado' },
-            { label: 'Brazo', valor: 'Extendible' },
-            { label: 'Control', valor: 'Caja de control de velocidad, inalámbrico' },
-            { label: 'Transformador', valor: '20v' },
-            { label: 'Cable', valor: '6 mts' },
-            { label: 'Soporte', valor: 'Para celular' },
-            { label: 'Precio', valor: '4350 soles' },
-          ],
           garantias: [
             { pregunta: 'Garantía de fábrica APIC (1 año)', respuesta: 'SÍ' },
             { pregunta: 'Cobertura por defectos de fabricación', respuesta: 'SÍ' },
@@ -912,19 +716,6 @@ export const WEBSITE_CONFIG = {
           descripcion_larga: 'La versión definitiva: altura, luz programable y captura aérea trabajando en conjunto para el montaje más ambicioso de nuestro catálogo.',
           imagenes_galeria: ['/equipos/DOMOS/DOMO 5/DOMOS_DOMO COMBO 5 - IMG1.jpg', '/equipos/DOMOS/DOMO 5/DOMOS_DOMO COMBO 5 - IMG2.jpg', '/equipos/DOMOS/DOMO 5/DOMOS_DOMO COMBO 5 - IMG3.jpg', '/equipos/DOMOS/DOMO 5/DOMOS_DOMO COMBO 5 - IMG4.jpg'],
           sobre_la_marca: 'APIC es fabricante líder en soluciones audiovisuales con más de 10 años de experiencia en eventos de alto impacto.',
-          ficha_tecnica: [
-            { label: 'Variante', valor: 'Domo Aéreo Premium Pixel' },
-            { label: 'Iluminación', valor: '65 barras LED blancas + 51 barras pixel' },
-            { label: 'Piezas', valor: '21 piezas' },
-            { label: 'Cableado', valor: 'Incluido con empalmes' },
-            { label: 'Material', valor: 'Metal, fierro, tubo cuadrado' },
-            { label: 'Brazo', valor: 'Extendible' },
-            { label: 'Control', valor: 'Caja de control de velocidad, inalámbrico, 1 controlador para pixel' },
-            { label: 'Transformadores', valor: '20v (brazo) + 5 transformadores de 12v (pixel)' },
-            { label: 'Cable', valor: 'RCA de 6 mts' },
-            { label: 'Soporte', valor: 'Para celular' },
-            { label: 'Precio', valor: '6550 soles' },
-          ],
           garantias: [
             { pregunta: 'Garantía de fábrica APIC (1 año)', respuesta: 'SÍ' },
             { pregunta: 'Cobertura por defectos de fabricación', respuesta: 'SÍ' },
@@ -959,17 +750,6 @@ export const WEBSITE_CONFIG = {
           descripcion_larga: 'Recuerdos físicos en segundos: cada invitado se lleva una fotografía impresa al instante, personalizada con la identidad de tu marca o evento.',
           imagenes_galeria: ['/equipos/FOTOCABINA/COMBO 1/FOTOCABINA_FOTO COMBO 1 IMG1.jpg', '/equipos/FOTOCABINA/COMBO 1/FOTOCABINA_FOTO COMBO 1 IMG2.jpg', '/equipos/FOTOCABINA/COMBO 1/FOTOCABINA_FOTO COMBO 1 IMG3.jpg', '/equipos/FOTOCABINA/COMBO 1/FOTOCABINA_FOTO COMBO 1 IMG4.jpg'],
           sobre_la_marca: 'APIC es fabricante líder en soluciones audiovisuales con más de 10 años de experiencia en eventos de alto impacto.',
-          ficha_tecnica: [
-            { label: 'Estructura', valor: '1.20 mt alto x 30 cm ancho x 15 cm profundidad' },
-            { label: 'Mesa', valor: 'Para impresora, 40x40 cm' },
-            { label: 'Tambor', valor: '45 cm' },
-            { label: 'Aro LED', valor: '45 cm' },
-            { label: 'Controles', valor: '1 control para LED RGB, 1 control para el aro LED' },
-            { label: 'Transformadores', valor: '2 transformadores de 12v' },
-            { label: 'Vinil', valor: 'Personalizado — foto cabina, mesa y tambor' },
-            { label: 'Soporte', valor: 'Para iPad' },
-            { label: 'Costo', valor: '2100 soles' },
-          ],
           garantias: [
             { pregunta: 'Garantía de fábrica APIC (1 año)', respuesta: 'SÍ' },
             { pregunta: 'Cobertura por defectos de fabricación', respuesta: 'SÍ' },
@@ -1000,19 +780,6 @@ export const WEBSITE_CONFIG = {
           descripcion_larga: 'Con impresora profesional Epson WiFi y corte automático, el flujo de impresión es tan rápido como la fila de invitados esperando su turno.',
           imagenes_galeria: ['/equipos/FOTOCABINA/COMBO 2/FOTOCABINA_FOTO COMBO 2 IMG1-05.jpg', '/equipos/FOTOCABINA/COMBO 2/FOTOCABINA_FOTO COMBO 2 IMG1-06.jpg', '/equipos/FOTOCABINA/COMBO 2/FOTOCABINA_FOTO COMBO 2 IMG1-07.jpg', '/equipos/FOTOCABINA/COMBO 2/FOTOCABINA_FOTO COMBO 2 IMG1-08.jpg', '/equipos/FOTOCABINA/COMBO 2/FOTOCABINA_FOTO COMBO 2 IMG1-09.jpg'],
           sobre_la_marca: 'APIC es fabricante líder en soluciones audiovisuales con más de 10 años de experiencia en eventos de alto impacto.',
-          ficha_tecnica: [
-            { label: 'Estructura', valor: '1.20 mt alto x 30 cm ancho x 15 cm profundidad' },
-            { label: 'Mesa', valor: 'Para impresora, 40x40 cm' },
-            { label: 'Tambor', valor: '45 cm' },
-            { label: 'Aro LED', valor: '45 cm' },
-            { label: 'Controles', valor: '1 control para LED RGB, 1 control para el aro LED' },
-            { label: 'Transformadores', valor: '2 transformadores de 12v' },
-            { label: 'Vinil', valor: 'Personalizado — foto cabina, mesa y tambor' },
-            { label: 'Soporte', valor: 'Para iPad' },
-            { label: 'Accesorios adicionales', valor: 'Guillotina incluida' },
-            { label: 'Impresora', valor: 'Epson L1250 WiFi' },
-            { label: 'Costo', valor: '3500 soles' },
-          ],
           garantias: [
             { pregunta: 'Garantía de fábrica APIC (1 año)', respuesta: 'SÍ' },
             { pregunta: 'Cobertura por defectos de fabricación', respuesta: 'SÍ' },
@@ -1046,16 +813,6 @@ export const WEBSITE_CONFIG = {
           descripcion_larga: 'Perspectiva elevada, impacto garantizado: el brazo regulable capta ángulos que ninguna cámara de mano puede lograr, dando a cada video un acabado de producción profesional.',
           imagenes_galeria: ['/equipos/AÉREO-360º/INFINITY_AÉREO 360 IMG1.jpg', '/equipos/AÉREO-360º/INFINITY_AÉREO 360 IMG2.jpg', '/equipos/AÉREO-360º/INFINITY_AÉREO 360 IMG3.jpg'],
           sobre_la_marca: 'APIC es fabricante líder en soluciones audiovisuales con más de 10 años de experiencia en eventos de alto impacto.',
-          ficha_tecnica: [
-            { label: 'Estructura', valor: 'Desarmable en 6 piezas' },
-            { label: 'Medidas', valor: '2.40 mt alto x 3 mts ancho' },
-            { label: 'Forro', valor: 'Color negro' },
-            { label: 'Brazo', valor: 'Regulable' },
-            { label: 'Control', valor: 'Caja de control de velocidad, inalámbrico' },
-            { label: 'Transformador', valor: '20v' },
-            { label: 'Soporte', valor: 'Para celular' },
-            { label: 'Costo', valor: '3200 soles' },
-          ],
           garantias: [
             { pregunta: 'Garantía de fábrica APIC (1 año)', respuesta: 'SÍ' },
             { pregunta: 'Cobertura por defectos de fabricación', respuesta: 'SÍ' },
@@ -1086,13 +843,6 @@ export const WEBSITE_CONFIG = {
           descripcion_larga: 'El detalle que distingue un evento premium de uno común: cordón rojo y acabado dorado que delimitan con elegancia cualquier acceso VIP o alfombra roja.',
           imagenes_galeria: ['/imagenes/balaustres-1.jpg', '/imagenes/balaustres-2.jpg', '/imagenes/balaustres-3.jpg', '/imagenes/balaustres-4.jpg'],
           sobre_la_marca: 'APIC es fabricante líder en soluciones audiovisuales con más de 10 años de experiencia en eventos de alto impacto.',
-          ficha_tecnica: [
-            { label: 'Balaustre', valor: 'Color dorado, 1 mt' },
-            { label: 'Cordón', valor: 'Color rojo, 1.50 mts' },
-            { label: 'Disco', valor: 'De pesa, para base' },
-            { label: 'Estructura', valor: 'Desarmable, 6 piezas' },
-            { label: 'Costo', valor: '210 soles' },
-          ],
           garantias: [
             { pregunta: 'Garantía de fábrica APIC (1 año)', respuesta: 'SÍ' },
             { pregunta: 'Cobertura por defectos de fabricación', respuesta: 'SÍ' },
@@ -1122,12 +872,6 @@ export const WEBSITE_CONFIG = {
           descripcion_larga: 'Una silueta minimalista en acero que se adapta con versatilidad a cualquier ambientación de marca o temática de evento.',
           imagenes_galeria: ['/equipos/CABINA-ESPEJADA/COMBO 1/CABINA ESPEJADA_CABINA ESP COMBO 1 IMG1.jpg', '/equipos/CABINA-ESPEJADA/COMBO 1/CABINA ESPEJADA_CABINA ESP COMBO 1 IMG2.jpg'],
           sobre_la_marca: 'APIC es fabricante líder en soluciones audiovisuales con más de 10 años de experiencia en eventos de alto impacto.',
-          ficha_tecnica: [
-            { label: 'Medidas', valor: '2.20 mt alto x 2.44 mt ancho x 1.22 mt profundidad' },
-            { label: 'Material', valor: 'Tubo cuadrado, acero y fierro' },
-            { label: 'Color', valor: 'Negro' },
-            { label: 'Costo', valor: '650 soles' },
-          ],
           garantias: [
             { pregunta: 'Garantía de fábrica APIC (1 año)', respuesta: 'SÍ' },
             { pregunta: 'Cobertura por defectos de fabricación', respuesta: 'SÍ' },
@@ -1153,14 +897,6 @@ export const WEBSITE_CONFIG = {
           descripcion_larga: 'Recubierta en planchas espejadas, la cabina se convierte en una instalación envolvente: cada ángulo refleja luz, color y a los propios invitados, creando el rincón fotográfico más buscado del evento.',
           imagenes_galeria: ['/equipos/CABINA-ESPEJADA/COMBO 2/CABINA ESPEJADA_CABINA ESP COMBO 2 IMG1.jpg', '/equipos/CABINA-ESPEJADA/COMBO 2/CABINA ESPEJADA_CABINA ESP COMBO 2 IMG2.jpg', '/equipos/CABINA-ESPEJADA/COMBO 2/CABINA ESPEJADA_CABINA ESP COMBO 2 IMG3.jpg'],
           sobre_la_marca: 'APIC es fabricante líder en soluciones audiovisuales con más de 10 años de experiencia en eventos de alto impacto.',
-          ficha_tecnica: [
-            { label: 'Medidas', valor: '2.20 mt alto x 2.44 mt ancho x 1.22 mt profundidad' },
-            { label: 'Material', valor: 'Tubo cuadrado, acero y fierro' },
-            { label: 'Color', valor: 'Negro' },
-            { label: 'Acabado', valor: '6 planchas tipo espejo plateado de 8mm de espesor' },
-            { label: 'Ensamblaje', valor: 'Con pernos' },
-            { label: 'Precio', valor: '2250 soles' },
-          ],
           garantias: [
             { pregunta: 'Garantía de fábrica APIC (1 año)', respuesta: 'SÍ' },
             { pregunta: 'Cobertura por defectos de fabricación', respuesta: 'SÍ' },
@@ -1194,16 +930,6 @@ export const WEBSITE_CONFIG = {
           descripcion_larga: 'Video panorámico en 180°, controlado con precisión de joystick: cada toma se siente coreografiada, como si un director estuviera detrás de cámara.',
           imagenes_galeria: ['/equipos/CABINA-180º/COMBO 1/CABINA 180_CABINA 180 COMBO 1 - IMG1.jpg', '/equipos/CABINA-180º/COMBO 1/CABINA 180_CABINA 180 COMBO 1 - IMG2.jpg', '/equipos/CABINA-180º/COMBO 1/CABINA 180_CABINA 180 COMBO 1 - IMG3.jpg'],
           sobre_la_marca: 'APIC es fabricante líder en soluciones audiovisuales con más de 10 años de experiencia en eventos de alto impacto.',
-          ficha_tecnica: [
-            { label: 'Estructura', valor: '1.20 mt alto x 30 cm ancho' },
-            { label: 'Brazo', valor: '2.40 mts alto' },
-            { label: 'Soporte', valor: 'Para celular' },
-            { label: 'Transformador', valor: '12v' },
-            { label: 'Control', valor: 'Caja de control de velocidad' },
-            { label: 'Mando', valor: 'Joystick' },
-            { label: 'Cable', valor: 'RCA de 6 mts' },
-            { label: 'Costo', valor: '2900 soles' },
-          ],
           garantias: [
             { pregunta: 'Garantía de fábrica APIC (1 año)', respuesta: 'SÍ' },
             { pregunta: 'Cobertura por defectos de fabricación', respuesta: 'SÍ' },
@@ -1233,18 +959,6 @@ export const WEBSITE_CONFIG = {
           descripcion_larga: 'Con iluminación LED decorativa y tu marca integrada en la estructura, el resultado se siente tan cuidado como una producción de estudio.',
           imagenes_galeria: ['/equipos/CABINA-180º/COMBO 2/CABINA 180_CABINA 180 COMBO 2 - IMG1.jpg', '/equipos/CABINA-180º/COMBO 2/CABINA 180_CABINA 180 COMBO 2 - IMG2.jpg', '/equipos/CABINA-180º/COMBO 2/CABINA 180_CABINA 180 COMBO 2 - IMG3.jpg', '/equipos/CABINA-180º/COMBO 2/CABINA 180_CABINA 180 COMBO 2 - IMG4.jpg'],
           sobre_la_marca: 'APIC es fabricante líder en soluciones audiovisuales con más de 10 años de experiencia en eventos de alto impacto.',
-          ficha_tecnica: [
-            { label: 'Estructura', valor: '1.20 mt alto x 30 cm ancho' },
-            { label: 'Brazo', valor: '2.40 mts alto' },
-            { label: 'Soporte', valor: 'Para celular' },
-            { label: 'Transformador', valor: '12v' },
-            { label: 'Control', valor: 'Caja de control de velocidad' },
-            { label: 'Mando', valor: 'Joystick' },
-            { label: 'Cable', valor: 'RCA de 6 mts' },
-            { label: 'Iluminación', valor: 'LED decorativo en la estructura' },
-            { label: 'Personalización', valor: 'Brandeado en la estructura' },
-            { label: 'Costo', valor: '3050 soles' },
-          ],
           garantias: [
             { pregunta: 'Garantía de fábrica APIC (1 año)', respuesta: 'SÍ' },
             { pregunta: 'Cobertura por defectos de fabricación', respuesta: 'SÍ' },
@@ -1275,19 +989,6 @@ export const WEBSITE_CONFIG = {
           descripcion_larga: 'La configuración más robusta de la familia: iluminación adicional y mayor estabilidad para tomas impecables incluso en los eventos más exigentes.',
           imagenes_galeria: ['/equipos/CABINA-180º/COMBO 3/CABINA 180_CABINA 180 COMBO 3 - IMG1.jpg', '/equipos/CABINA-180º/COMBO 3/CABINA 180_CABINA 180 COMBO 3 - IMG2.jpg', '/equipos/CABINA-180º/COMBO 3/CABINA 180_CABINA 180 COMBO 3 - IMG3.jpg', '/equipos/CABINA-180º/COMBO 3/CABINA 180_CABINA 180 COMBO 3 - IMG4.jpg', '/equipos/CABINA-180º/COMBO 3/CABINA 180_CABINA 180 COMBO 3 - IMG5.jpg'],
           sobre_la_marca: 'APIC es fabricante líder en soluciones audiovisuales con más de 10 años de experiencia en eventos de alto impacto.',
-          ficha_tecnica: [
-            { label: 'Estructura', valor: '1.20 mt alto x 30 cm ancho' },
-            { label: 'Brazo', valor: '2.40 mts alto' },
-            { label: 'Soporte', valor: 'Para celular' },
-            { label: 'Transformador', valor: '12v' },
-            { label: 'Control', valor: 'Caja de control de velocidad' },
-            { label: 'Mando', valor: 'Joystick' },
-            { label: 'Cable', valor: 'RCA de 6 mts' },
-            { label: 'Iluminación', valor: 'LED decorativo en la estructura + 4 barras LED blancas netamente para iluminación' },
-            { label: 'Personalización', valor: 'Brandeado en la estructura' },
-            { label: 'Disco de pesas', valor: '21 kg' },
-            { label: 'Costo', valor: '3200 soles' },
-          ],
           garantias: [
             { pregunta: 'Garantía de fábrica APIC (1 año)', respuesta: 'SÍ' },
             { pregunta: 'Cobertura por defectos de fabricación', respuesta: 'SÍ' },
